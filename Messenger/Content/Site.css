@@ -1,0 +1,146 @@
+﻿body {
+    font-size: 18px;
+}
+
+.header {
+    background-color: #252845;
+}
+
+.footer-el {
+    color: #fff;
+}
+
+    .footer-el:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+
+.text-center {
+    padding-right: auto;
+    padding-left: auto;
+}
+
+.settings-block:hover {
+    background-color: #191c39;
+}
+
+.padding-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ccc;
+}
+
+.chatters {
+    background-color: #f9f9fa;
+}
+
+.block-chatter-full {
+}
+
+.block-chatter {
+    height: 60px;
+    color: #777777;
+}
+
+    .block-chatter:hover {
+        background-color: #f0f0f1;
+    }
+
+.img-user {
+    width: 50px;
+    height: 50px;
+    border: solid #707070 1px;
+    display: inline-block;
+    border-radius: 25px;
+    position: relative;
+    top: 5px;
+}
+
+.name-in-panel {
+    position: relative;
+    top: -5px;
+}
+
+.message-in-panel {
+    position: relative;
+    top: 20px;
+}
+
+.message-col {
+    border-left: solid #707070 3px;
+    font-size: 14px;
+    height:500px;
+}
+
+.message {
+    padding-left: 40px;
+    padding-right: 40px;
+    color: #111111;
+}
+
+    .message:hover {
+        background-color: #eeeeee;
+    }
+
+.message-sender {
+    font-size: 18px;
+    color: #555555;
+}
+
+.message-text {
+    width: 620px;
+    margin-left:100px;
+}
+
+.message-time {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.message-writing {
+    font-size: 20px;
+}
+
+.form-control{
+    position:absolute;
+    bottom:0px;
+    left:30px;
+    display:inline-block;
+    width:600px;
+}
+
+.input-inline {
+    display: inline-block;
+    position: absolute;
+    bottom: 30px;
+    right: 60px;
+    background-color: #191C39;
+    color:#FFFFD9;
+    border-radius:30px;
+    width:100px;
+}
+
+    .input-inline:hover {
+        background-color: #101030;
+    }
+
+    .overflow-auto {
+        height: 400px;
+        overflow: auto !important;
+    }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,94 @@
+﻿@model List<Messenger.Models.Chats>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Messenger</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/vendor")
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="row">
+                <div class="col-1 text-center padding-10">
+                    Logo
+                </div>
+                <div class="col-2 text-center settings-block padding-10">
+                    <a href="#" class="footer-el">
+                        <i class="fas fa-bars settings"></i>
+                        Settings
+                    </a>
+                </div>
+                <div class="col-7 settings-block padding-10">
+                    <a href="#" class="footer-el" id="chatterName"></a>
+                    <div style="display: inline-block; visibility: hidden;" id="lastSeenBlock">
+                    <span>last seen</span>
+                    <span>x minutes ago</span>
+                    </div>
+                </div>
+                <div class="col-2 padding-10">
+                    <input type="text" class="form-control-sm" size="15" placeholder="search">
+                </div>
+            </div>
+        </div>
+        <div class="main-part chatters">
+            <div class="row">
+                <div class="col-3">
+                    @foreach (var chat in Model)
+                    {
+                        <div class="block-chatter" onclick="ClickOnChat(@chat.Id, @chat.Sender, @chat.Receiver)">
+                            <img src="" class="img-user" alt="">
+                            @if (chat.Sender == ViewBag.MyId)
+                            {
+                                using (Messenger.Models.MessengerDBEntities context = new Messenger.Models.MessengerDBEntities())
+                                {
+                                    var name = context.Users.Where(n => n.Id == chat.Receiver).FirstOrDefault();
+                                    <span class="name-in-panel">@name.NameToString()</span>
+                                }
+                            }
+                            else
+                            {
+                                using (Messenger.Models.MessengerDBEntities context = new Messenger.Models.MessengerDBEntities())
+                                {
+                                    var name = context.Users.Where(n => n.Id == chat.Sender).FirstOrDefault();
+                                    <span class="name-in-panel">@name.NameToString()</span>
+                                }
+                            }
+
+                            <span class="message-in-panel">
+                                @chat.GetTextOfLastMessageFromChat()
+                            </span>
+                        </div>
+                    }
+                </div>
+                <div class="col-9 message-col ">
+                    <div id="right-col" class="overflow-auto">
+                        <div id="messageBlock">
+                            <h3 id="plsSelectLabel">Pls, select chat to write a message...</h3>
+                        </div>
+                    </div>
+                    <div class="message-writing text-center">
+                        <div class="send-field" id="sendField" style="visibility: hidden;">
+                            <form>
+                                <div>
+                                    <textarea class="form-control" id="message-area"></textarea>
+                                </div>
+                                <p>
+                                    <input class="input-inline" id="button-send" onclick="SendMessage()" type="button" value="Send">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/vendor/scripts")
+    @Scripts.Render("~/app/scripts")
+</body>
+</html>

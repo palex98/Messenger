@@ -1,0 +1,19 @@
+﻿@model List<Messenger.Models.Messages>
+
+@foreach (var m in Model)
+{
+    <div class="message">
+        <span class="message-sender">
+            @using (Messenger.Models.MessengerDBEntities context = new Messenger.Models.MessengerDBEntities())
+            {
+                @context.Users.Where(u => u.Id == m.Sender).FirstOrDefault().NameToString()
+            }
+        </span>
+        <span class="message-text">
+            @m.Text
+        </span>
+        <span class="message-time">
+            @m.DateTime.ToShortTimeString()
+        </span>
+    </div>
+}

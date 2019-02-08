@@ -1,0 +1,76 @@
+﻿body {
+    margin: 0 0;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+.form-register {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+    background-color: #282c34;
+    color: #abb2b3;
+}
+
+.btn {
+    background-color: #11151b;
+    border-color: #000000;
+}
+
+INPUT[type="text"], INPUT[type="email"],
+INPUT[type="password"] {
+    background-color: #777777;
+    color: #ffffff;
+    border: 2px solid black;
+    box-shadow: 0 0 0 0 #000000;
+}
+
+    INPUT[type="text"]:focus, INPUT[type="email"]:focus, INPUT[type="password"]:focus {
+        background-color: #777777;
+        color: #ffffff;
+        border: 2px solid #616a54;
+        box-shadow: 0 0 0 0 #000000;
+    }
+
+input::-webkit-input-placeholder {
+    color: #f0f0f0 !important;
+}
+
+input::-moz-placeholder { /* Firefox 18- */
+    color: #f0f0f0 !important;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: #f0f0f0 !important;
+}
+
+.btn:hover, .btn:active:focus {
+    background-color: #6fc182 !important;
+    border: 2px solid #333333;
+    outline: 0px !important;
+    box-shadow: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:focus, .btn-primary.focus {
+    border: 2px solid #333333;
+    box-shadow: none;
+}
+
+.fa-google-plus {
+    font-size: 35px;
+    color: #cc463a;
+    margin-top: 10px;
+}
+
+.fa-facebook-f {
+    font-size: 35px;
+    margin-left: 10px;
+    color: #4867aa;
+    margin-top: 10px;
+}
+
+.btn-google {
+    margin-top: 10px;
+}
