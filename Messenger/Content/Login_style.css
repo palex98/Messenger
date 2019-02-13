@@ -1,21 +1,16 @@
-﻿body {
+body {
     margin: 0 0;
     font-family: 'Titillium Web', sans-serif;
 }
 
 
-.form-register {
+.form-login {
     width: 50%;
     max-width: 420px;
     padding: 15px;
     margin: auto;
     background-color: #f9f9fa;
     color: #222222;
-}
-
-.btn {
-    background-color: #007bff;
-    border:0px solid #000000;
 }
 
 INPUT[type="text"], INPUT[type="email"],
@@ -26,11 +21,19 @@ INPUT[type="password"] {
     box-shadow: 0 0 0 0 #000000;
 }
 
-    INPUT[type="text"]:focus, INPUT[type="email"]:focus, INPUT[type="password"]:focus {
-        border: 0px solid #252845;
-        box-shadow: 1px 1px 5px 1px #999999;
-    }
+INPUT[type="text"]:focus, INPUT[type="email"]:focus, INPUT[type="password"]:focus {
+    border: 0px solid #252845;
+    box-shadow: 1px 1px 5px 1px #999;
+}
 
+.remember-label:hover {
+    color: #007bff;
+}
+
+.btn {
+    background-color: #007bff;
+    border: 0px solid #000000;
+}
 input::-webkit-input-placeholder {
     color: #777 !important;
 }
@@ -42,7 +45,6 @@ input::-moz-placeholder { /* Firefox 18- */
 input::-moz-placeholder { /* Firefox 19+ */
     color: #777 !important;
 }
-
 .btn:hover, .btn:active:focus {
     background-color: #006bef !important;
     border: 0px solid #333333;

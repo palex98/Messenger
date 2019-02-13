@@ -36,6 +36,9 @@ namespace Messenger
             bundles.Add(new StyleBundle("~/Content/reg_style").Include(
                       "~/Content/Reg_style.css"));
 
+            bundles.Add(new StyleBundle("~/Content/login_style").Include(
+                      "~/Content/Login_style.css"));
+
             bundles.Add(new ScriptBundle("~/app/scripts").Include(
                         "~/Scripts/scripts.js"));
         }
