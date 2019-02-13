@@ -1,4 +1,4 @@
-﻿function ClickOnChat(chatId, sender, receiver) {
+﻿function ClickOnChat(chatId, sender, receiver, name) {
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         if (sender == window.myId) {
@@ -7,7 +7,7 @@
         else{
             window.currentUserId = sender;
         }
-        GetChatterName();
+        SetChatterName(name);
         GetMessagesFromCurrentChat();
     }
     $("#lastSeenBlock").css("visibility", "visible");
@@ -27,15 +27,8 @@ function GetMessagesFromCurrentChat() {
     });
 }
 
-function GetChatterName() {
-    $.ajax({
-        type: "GET",
-        url: '/api/user/GetName',
-        data: { id: window.currentUserId },
-        success: function (data) {
-            $("#chatterName").text(data);
-        }
-    });
+function SetChatterName(name) {
+            $("#chatterName").text(name);
 }
 
 function SendMessage() {
@@ -50,7 +43,3 @@ function SendMessage() {
     });
     $("#message-area").val('');
 }
-
-window.onload = function () {
-    window.myId = 2;
-};

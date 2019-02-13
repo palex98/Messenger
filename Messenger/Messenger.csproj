@@ -171,13 +171,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Chats.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom\ChatDataToView.cs" />
     <Compile Include="Models\Custom\Contact.cs" />
     <Compile Include="Models\Messages.cs">
       <DependentUpon>Model.tt</DependentUpon>

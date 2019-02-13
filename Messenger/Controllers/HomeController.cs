@@ -12,7 +12,8 @@ namespace Messenger.Controllers
     {
         public ActionResult Index(int id)
         {
-            List<Chats> chats = new List<Chats>();
+            List<ChatDataToView> data = new List<ChatDataToView>();
+
             Dictionary<int, int> contacts = new Dictionary<int, int>();
 
             using (MessengerDBEntities context = new MessengerDBEntities())
@@ -27,11 +28,17 @@ namespace Messenger.Controllers
                 {
 
                 }
-                
 
                 foreach (var c in contacts)
                 {
-                    chats.Add(context.Chats.Where(i => i.Id == c.Value).FirstOrDefault());
+                    ChatDataToView dt = new ChatDataToView
+                    {
+                        chatId = c.Value,
+                        Receiver = c.Key,
+                        partnerFullName = context.Users.Where(u => u.Id == c.Key).FirstOrDefault().NameToString(),
+                        textOfLastMsg = Chats.GetTextOfLastMessageFromChat(c.Value)
+                    };
+                    data.Add(dt);
                 }
 
                 user.LastSeen = DateTime.Now;
@@ -40,7 +47,7 @@ namespace Messenger.Controllers
 
             ViewBag.MyId = id;
 
-            return View(chats);
+            return View(data);
         }
     }
 }
