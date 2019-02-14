@@ -1,4 +1,4 @@
-﻿@model List<Messenger.Models.Chats>
+﻿@model List<Messenger.Models.Custom.ChatDataToView>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +27,8 @@
                 <div class="col-7 settings-block padding-10">
                     <a href="#" class="footer-el" id="chatterName"></a>
                     <div style="display: inline-block; visibility: hidden;" id="lastSeenBlock">
-                    <span>last seen</span>
-                    <span>x minutes ago</span>
+                        <span>last seen</span>
+                        <span>x minutes ago</span>
                     </div>
                 </div>
                 <div class="col-2 padding-10">
@@ -41,27 +41,11 @@
                 <div class="col-3">
                     @foreach (var chat in Model)
                     {
-                        <div class="block-chatter" onclick="ClickOnChat(@chat.Id, @chat.Sender, @chat.Receiver)">
+                        <div class="block-chatter" onclick="ClickOnChat(@chat.chatId, @chat.Sender, @chat.Receiver, '@chat.partnerFullName')">
                             <img src="" class="img-user" alt="">
-                            @if (chat.Sender == ViewBag.MyId)
-                            {
-                                using (Messenger.Models.MessengerDBEntities context = new Messenger.Models.MessengerDBEntities())
-                                {
-                                    var name = context.Users.Where(n => n.Id == chat.Receiver).FirstOrDefault();
-                                    <span class="name-in-panel">@name.NameToString()</span>
-                                }
-                            }
-                            else
-                            {
-                                using (Messenger.Models.MessengerDBEntities context = new Messenger.Models.MessengerDBEntities())
-                                {
-                                    var name = context.Users.Where(n => n.Id == chat.Sender).FirstOrDefault();
-                                    <span class="name-in-panel">@name.NameToString()</span>
-                                }
-                            }
-
+                            <span class="name-in-panel">@chat.partnerFullName</span>
                             <span class="message-in-panel">
-                                @chat.GetTextOfLastMessageFromChat()
+                                @chat.textOfLastMsg
                             </span>
                         </div>
                     }
@@ -90,5 +74,10 @@
     </div>
     @Scripts.Render("~/vendor/scripts")
     @Scripts.Render("~/app/scripts")
+    <script type="text/javascript">
+        window.onload = function () {
+            window.myId = @ViewBag.MyId;
+        };
+    </script>
 </body>
 </html>
