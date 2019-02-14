@@ -12,25 +12,30 @@
 </head>
 <body>
     <div class="container-fluid">
-        <form class="form-login" action="" method="post">
+        <form class="form-login" action="/Login/UserLogin" method="post">
             <div class="text-center mb-4">
 
                 <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             </div>
             <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Email or username" name="login" required>
                 <label for="inputEmail"></label>
             </div>
             <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="pass" required>
                 <label for="inputPassword"></label>
             </div>
             <div>
                 <input type="checkbox"  id="rememberBox">
-                <label for="rememberBox" class="remember-label"><p >Remember me</p></label>
+                <label for="rememberBox" class="remember-label">Remember me</label>
             </div>
             <button class="btn btn-lg btn-primary btn-block " type="submit">Login</button>
             <div>
+                @if(ViewBag.ErrorMessage != null){
+                <p style="color: red;">@ViewBag.ErrorMessage</p>
+                }
+            </div>
+            @*<div>
                 <button class="btn btn-lg btn-primary btn-block btn-google" type="submit">
                     <a href="#" class="google ">
                         <i class="fab fa-google-plus"></i>
@@ -41,7 +46,8 @@
                         <i class="fab fa-facebook-f"></i>
                     </a>
                 </button>
-            </div>
+            </div>*@
         </form>
     </div>
 </body>
+</html>
