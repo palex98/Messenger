@@ -78,5 +78,18 @@ namespace Messenger.Controllers
 
             return PartialView("Message", new List<Messages> { newMessage });
         }
+
+        [HttpPost]
+        public ActionResult SearchMessages(int chatId, string searchRequest)
+        {
+            List<Messages> messages;
+
+            using (var context = new MessengerDBEntities())
+            {
+                messages = context.Messages.Where(m => m.ChatId == chatId && m.Text.Contains(searchRequest)).ToList();
+            }
+
+            return PartialView("Message", messages);
+        }
     }
 }

@@ -43,3 +43,16 @@ function SendMessage() {
     });
     $("#message-area").val('');
 }
+
+function SearchMessages() {
+    var searchRequest = $("#searchMsgInput").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/Message/SearchMessages',
+        data: { chatId: window.currentChatId, searchRequest: searchRequest },
+        success: function (data) {
+            $("#messageBlock").empty().append(data);
+        }
+    });
+}
