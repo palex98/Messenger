@@ -72,12 +72,16 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/vendor/scripts")
-    @Scripts.Render("~/app/scripts")
+
+@Scripts.Render("~/vendor/scripts")
+@Scripts.Render("~/app/scripts")
+@Scripts.Render("~/app/websocket")
+
     <script type="text/javascript">
         window.onload = function () {
             window.myId = @ViewBag.MyId;
         };
     </script>
+
 </body>
 </html>

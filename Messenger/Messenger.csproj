@@ -169,10 +169,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1847,6 +1847,7 @@
     <Content Include="Scripts\jsscrollpane\jquery.mousewheel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\WebSocket.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1857,9 +1858,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Message\Message.cshtml" />
-    <Content Include="Views\Registration\Registration.cshtml" />
     <Content Include="Views\Message\NoMessages.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
