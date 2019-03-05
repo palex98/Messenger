@@ -41,9 +41,6 @@ namespace Messenger
 
             bundles.Add(new ScriptBundle("~/app/scripts").Include(
                         "~/Scripts/scripts.js"));
-
-            bundles.Add(new ScriptBundle("~/app/websocket").Include(
-                        "~/Scripts/WebSocket.js"));
         }
     }
 }
