@@ -38,19 +38,17 @@
         </div>
         <div class="main-part chatters">
             <div class="row">
-                <div class="col-3">
+                <div class="col-3 no-padding-right">
                     @foreach (var chat in Model)
                     {
-                        <div class="block-chatter" onclick="ClickOnChat(@chat.chatId, @chat.Sender, @chat.Receiver, '@chat.partnerFullName')">
+                        <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Sender, @chat.Receiver, '@chat.partnerFullName')">
                             <img src="" class="img-user" alt="">
                             <span class="name-in-panel">@chat.partnerFullName</span>
-                            <span class="message-in-panel">
-                                @chat.textOfLastMsg
-                            </span>
+                            <div class="chat-counter">0</div>
                         </div>
                     }
                 </div>
-                <div class="col-9 message-col ">
+                <div class="col-9 message-col no-padding-left">
                     <div id="right-col" class="overflow-auto">
                         <div id="messageBlock">
                             <h3 id="plsSelectLabel">Pls, select chat to write a message...</h3>
@@ -62,8 +60,9 @@
                                 <div>
                                     <textarea class="form-control" id="message-area"></textarea>
                                 </div>
+                                <input type="file" />
                                 <p>
-                                    <input class="input-inline" id="button-send" onclick="SendMessage()" type="button" value="Send">
+                                    <input class="input-inline" id="button-send btn btn-primary" onclick="SendMessage()" type="button" value="Send">
                                 </p>
                             </form>
                         </div>

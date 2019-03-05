@@ -13,7 +13,9 @@
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
     $("#plsSelectLabel").css("visibility", "hidden");
-}
+    $(".block-chatter").removeClass('active-chatter');
+       $("#" + chatId).toggleClass("active-chatter");
+};
 
 function GetMessagesFromCurrentChat() {
     $.ajax({
@@ -25,24 +27,29 @@ function GetMessagesFromCurrentChat() {
             $("#messageBlock").html(data);
         }
     });
-}
+};
 
 function SetChatterName(name) {
             $("#chatterName").text(name);
-}
+};
 
 function SendMessage() {
-    var text = $("#message-area").val();
-    $.ajax({
-        type: "POST",
-        url: '/Message/PostMessage',
-        data: { text: text, sender: window.myId, receiver: window.currentUserId, chatId: window.currentChatId },
-        success: function (data) {
-            $("#messageBlock").append(data);
-        }
-    });
-    $("#message-area").val('');
-}
+    if ($('#message-area').val() == '') ;
+    else {
+        var text = $("#message-area").val();
+        $.ajax({
+            type: "POST",
+            url: '/Message/PostMessage',
+            data: { text: text, sender: window.myId, receiver: window.currentUserId, chatId: window.currentChatId },
+            success: function (data) {
+                $("#messageBlock").append(data);
+            }
+        });
+        $("#message-area").val('');
+        CheckCounter();
+        
+    }
+};
 
 function SearchMessages() {
     var searchRequest = $("#searchMsgInput").val();
@@ -55,4 +62,28 @@ function SearchMessages() {
             $("#messageBlock").empty().append(data);
         }
     });
-}
+};
+
+function ToLastMessage() {
+    var div = $("#right-col");
+    div.scrollTop(div.prop('scrollHeight'));
+};
+
+$('#message-area').on('keypress', function (e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        SendMessage();
+    }
+});
+
+
+function CheckCounter() {
+    if ($('.chat-counter').html() == '0') {
+        $('.chat-counter').css('visibility', 'hidden');
+    }
+    else {
+        $('.chat-counter').css('visibility', 'visible');
+    }
+};
+/* delete comment if you want counter to work*/
+//CheckCounter();

@@ -9,8 +9,11 @@
                 @context.Users.Where(u => u.Id == m.Sender).FirstOrDefault().NameToString()
             }
         </span>
+        <span class="message-unread-circle"></span>
         <span class="message-text">
+            <div>
             @m.Text
+            </div>
         </span>
         <span class="message-time">
             @m.DateTime.ToShortTimeString()
