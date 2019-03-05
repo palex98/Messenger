@@ -1,5 +1,6 @@
 ﻿using Messenger.Models;
 using Messenger.Models.Custom;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

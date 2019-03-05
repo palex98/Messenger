@@ -2,9 +2,9 @@
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         if (sender == window.myId) {
-            window.currentUserId =  receiver;
+            window.currentUserId = receiver;
         }
-        else{
+        else {
             window.currentUserId = sender;
         }
         SetChatterName(name);
@@ -28,7 +28,7 @@ function GetMessagesFromCurrentChat() {
 }
 
 function SetChatterName(name) {
-            $("#chatterName").text(name);
+    $("#chatterName").text(name);
 }
 
 function SendMessage() {
