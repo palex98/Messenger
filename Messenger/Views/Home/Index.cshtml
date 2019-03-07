@@ -41,7 +41,7 @@
                 <div class="col-3 no-padding-right">
                     @foreach (var chat in Model)
                     {
-                        <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Sender, @chat.Receiver, '@chat.partnerFullName')">
+                        <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Sender, '@chat.partnerFullName')">
                             <img src="" class="img-user" alt="">
                             <span class="name-in-panel">@chat.partnerFullName</span>
                             <div class="chat-counter">0</div>
@@ -72,8 +72,15 @@
         </div>
     </div>
 
-@Scripts.Render("~/vendor/scripts")
-@Scripts.Render("~/app/scripts")
+    @Scripts.Render("~/vendor/scripts")
+    @Scripts.Render("~/app/scripts")
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <!--Ссылка на библиотеку SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/util.js"></script>
 
     <script type="text/javascript">
         window.onload = function () {

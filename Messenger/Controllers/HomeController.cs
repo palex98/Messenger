@@ -35,14 +35,13 @@ namespace Messenger.Controllers
                     ChatDataToView dt = new ChatDataToView
                     {
                         chatId = c.Value,
-                        Receiver = c.Key,
-                        partnerFullName = context.Users.Where(u => u.Id == c.Key).FirstOrDefault().NameToString(),
-                        textOfLastMsg = Chats.GetTextOfLastMessageFromChat(c.Value)
+                        //Receiver = c.Key,
+                        partnerFullName = context.Users.Where(u => u.Id == c.Key).FirstOrDefault().UserName,
                     };
                     data.Add(dt);
                 }
 
-                user.LastSeen = DateTime.Now;
+                user.LastSeen = DateTime.Now.ToShortDateString();
                 context.SaveChanges();
             }
 

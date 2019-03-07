@@ -72,6 +72,7 @@
     margin: 1em;
     border-radius: 50%;
     text-align: center;
+    visibility: hidden;
 }
 
 .message-in-panel {
@@ -82,7 +83,7 @@
 .message-col {
     border-left: solid #707070 3px;
     font-size: 18px;
-    height:500px;
+    height: 500px;
 }
 
 .message {
@@ -103,24 +104,25 @@
 }
 
 .message-text {
-    display:inline-block;
-    width: 430px ;
+    display: inline-block;
+    width: 430px;
     margin-left: 100px;
 }
-    .message-unread-circle{
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        background-color: darkblue;
-        border-radius: 5px;
-        visibility:hidden;
-    }
+
+.message-unread-circle {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: darkblue;
+    border-radius: 5px;
+    visibility: hidden;
+}
 
 
-    .message-text div {
-        word-wrap: break-word;
-        width: 430px;
-    }
+.message-text div {
+    word-wrap: break-word;
+    width: 430px;
+}
 
 .message-time {
     display: inline-block;
@@ -135,12 +137,12 @@
     font-size: 20px;
 }
 
-.form-control{
-    position:absolute;
-    bottom:0px;
-    left:30px;
-    display:inline-block;
-    width:600px;
+.form-control {
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+    display: inline-block;
+    width: 600px;
     resize: none;
 }
 
@@ -150,26 +152,26 @@
     bottom: 30px;
     right: 60px;
     background-color: #191C39;
-    color:#FFFFD9;
-    border-radius:30px;
-    width:100px;
+    color: #FFFFD9;
+    border-radius: 30px;
+    width: 100px;
 }
 
-input[type="file"]{
+input[type="file"] {
     font-size: 10px;
-    position:relative;
-    left:315px;
-    top:10px;
+    position: relative;
+    left: 315px;
+    top: 10px;
 }
 
-    .input-inline:hover {
-        background-color: #101030;
-    }
+.input-inline:hover {
+    background-color: #101030;
+}
 
-    .overflow-auto {
-        height: 400px;
-        overflow: auto !important;
-    }
+.overflow-auto {
+    height: 400px;
+    overflow: auto !important;
+}
 
 ::-webkit-scrollbar {
     width: 12px;

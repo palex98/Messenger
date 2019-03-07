@@ -19,7 +19,6 @@ namespace Messenger.Models
         public System.DateTime DateTime { get; set; }
         public bool IsReaded { get; set; }
         public int Sender { get; set; }
-        public int Receiver { get; set; }
         public int ChatId { get; set; }
     }
 }

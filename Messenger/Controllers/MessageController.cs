@@ -1,4 +1,6 @@
-﻿using Messenger.Models;
+﻿using Messenger.Hubs;
+using Messenger.Models;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,20 +36,50 @@ namespace Messenger.Controllers
                 }
             }
 
+            if (listOfMessages.Count > 20) listOfMessages = listOfMessages.Skip(listOfMessages.Count - 20).ToList();
+
             return PartialView("Message", listOfMessages);
         }
 
         [HttpPost]
-        public ActionResult PostMessage(string text, int sender, int receiver, int chatId, bool isForvarded = false, bool isReply = false, int? replyTo = 0)
+        public ActionResult GetLastMessage(int chatId)
+        {
+            List<Messages> message = new List<Messages>();
+
+            using (MessengerDBEntities context = new MessengerDBEntities())
+            {
+                var chat = context.Chats.Where(c => c.Id == chatId).FirstOrDefault();
+
+                int messageId;
+
+                try
+                {
+                    messageId = JsonConvert.DeserializeObject<List<int>>(chat.ListOfMessages).LastOrDefault();
+                }
+                catch
+                {
+                    return PartialView("NoMessages");
+                }
+
+                message.Add(context.Messages.FirstOrDefault(i => i.Id == messageId));
+            }
+
+            return PartialView("Message", message);
+        }
+
+        [HttpPost]
+        public ActionResult PostMessage(string text, int sender, int chatId)
         {
             Messages newMessage = new Messages
             {
                 Text = text,
                 Sender = sender,
-                Receiver = receiver,
                 ChatId = chatId,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                IsReaded = false
             };
+
+            int receiver;
 
             using (MessengerDBEntities context = new MessengerDBEntities())
             {
@@ -55,6 +87,8 @@ namespace Messenger.Controllers
                 context.SaveChanges();
 
                 var chat = context.Chats.Where(c => c.Id == chatId).FirstOrDefault();
+
+                receiver = sender == chat.Sender ? chat.Receiver : chat.Sender;
 
                 List<int> listOfMessages = new List<int>();
 
@@ -76,20 +110,13 @@ namespace Messenger.Controllers
                 context.SaveChanges();
             }
 
-            return PartialView("Message", new List<Messages> { newMessage });
-        }
-
-        [HttpPost]
-        public ActionResult SearchMessages(int chatId, string searchRequest)
-        {
-            List<Messages> messages;
-
-            using (var context = new MessengerDBEntities())
+            if(MessengerHub.Users.Exists(u => u.Id == receiver))
             {
-                messages = context.Messages.Where(m => m.ChatId == chatId && m.Text.Contains(searchRequest)).ToList();
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<MessengerHub>();
+                hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == receiver).ConnectionId).newMessage(chatId);
             }
-
-            return PartialView("Message", messages);
+            
+            return PartialView("Message", new List<Messages> { newMessage });
         }
     }
 }

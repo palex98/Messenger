@@ -22,9 +22,6 @@ namespace Messenger.Controllers
             {
                 if (context.Users.Any(u => u.UserName == login)) {
                     user = context.Users.FirstOrDefault(u => u.UserName == login);
-                }else if (context.Users.Any(u => u.Email == login))
-                {
-                    user = context.Users.FirstOrDefault(u => u.Email == login);
                 }
                 else
                 {
@@ -34,7 +31,10 @@ namespace Messenger.Controllers
 
                 var password = user.Password;
 
-                if (pass == password) return RedirectToAction("Index", "Home", new { id = user.Id });
+                if (pass == password) {
+                    HttpContext.Response.Cookies["user"].Value = user.Id.ToString();
+                    return RedirectToAction("Index", "Home", new { id = user.Id });
+                }
             }
 
             ViewBag.ErrorMessage = "Password is incorrect!";
