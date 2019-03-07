@@ -3,14 +3,16 @@
     var messenger = $.connection.messengerHub;
 
     // Функция, вызываемая при подключении нового пользователя
-    messenger.client.onUserConnected = function () {
-
-        alert("Connect");
+    messenger.client.onUserConnected = function (userId) {
+        if (window.currentReceiver == userId) {
+            GetUserStatus(userId);
+        }
     };
 
-    messenger.client.onUserDisconnected = function (id, userName) {
-
-        alert("DISCONNECT");
+    messenger.client.onUserDisconnected = function (userId) {
+        if (window.currentReceiver == userId) {
+            GetUserStatus(userId);
+        }
     };
 
     messenger.client.newMessage = function (chatId) {
@@ -24,9 +26,7 @@
         }
     };
 
-    // Открываем соединение
     $.connection.hub.start().done(function () {
-        alert('start');
         var userId = getCookie("user");
         messenger.server.connect(userId);
     });

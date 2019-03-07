@@ -1,14 +1,10 @@
-﻿function ClickOnChat(chatId, sender, name) {
+﻿function ClickOnChat(chatId, receiver, name) {
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
-        /*if (sender == window.myId) {
-            window.currentUserId = receiver;
-        }
-        else {
-            window.currentUserId = sender;
-        }*/
+        window.currentReceiver = receiver;
         SetChatterName(name);
         GetMessagesFromCurrentChat();
+        GetUserStatus(receiver);
     }
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
@@ -17,6 +13,17 @@
     $("#" + chatId).toggleClass("active-chatter");
     $("#" + chatId + " .chat-counter").text("0");
     $("#" + chatId + " .chat-counter").css('visibility', 'hidden');
+}
+
+function GetUserStatus(userId) {
+    $.ajax({
+        type: "GET",
+        url: '/api/User',
+        data: { userId: userId },
+        success: function (data) {
+            $("#lastSeen").text(data);
+        }
+    });
 }
 
 function GetMessagesFromCurrentChat() {
@@ -59,7 +66,6 @@ function SendMessage() {
             }
         });
         $("#message-area").val('');
-        CheckCounter();    
     }
 }
 
@@ -74,17 +80,6 @@ $('#message-area').on('keypress', function (e) {
         SendMessage();
     }
 })
-
-function CheckCounter() {
-    if ($('.chat-counter').html() == '0') {
-        $('.chat-counter').css('visibility', 'hidden');
-    }
-    else {
-        $('.chat-counter').css('visibility', 'visible');
-    }
-}
-/* delete comment if you want counter to work*/
-//CheckCounter();
 
 function getCookie(cname) {
     var name = cname + "=";

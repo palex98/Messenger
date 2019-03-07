@@ -27,8 +27,7 @@
                 <div class="col-7 settings-block padding-10">
                     <a href="#" class="footer-el" id="chatterName"></a>
                     <div style="display: inline-block; visibility: hidden;" id="lastSeenBlock">
-                        <span>last seen</span>
-                        <span>x minutes ago</span>
+                        <span id="lastSeen"></span>
                     </div>
                 </div>
                 <div class="col-2 padding-10">
@@ -41,7 +40,7 @@
                 <div class="col-3 no-padding-right">
                     @foreach (var chat in Model)
                     {
-                        <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Sender, '@chat.partnerFullName')">
+                        <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Receiver, '@chat.partnerFullName')">
                             <img src="" class="img-user" alt="">
                             <span class="name-in-panel">@chat.partnerFullName</span>
                             <div class="chat-counter">0</div>
@@ -75,7 +74,6 @@
     @Scripts.Render("~/vendor/scripts")
     @Scripts.Render("~/app/scripts")
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <!--Ссылка на библиотеку SignalR -->
     <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
     <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->

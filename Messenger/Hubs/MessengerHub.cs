@@ -11,7 +11,6 @@ namespace Messenger.Hubs
     {
         public static List<Users> Users = new List<Users>();
 
-        // Подключение нового пользователя
         public void Connect(int userId)
         {
             if (!Users.Any(x => x.ConnectionId == Context.ConnectionId))
@@ -26,21 +25,28 @@ namespace Messenger.Hubs
                     Users.Add(user);
                 }
 
-                // Посылаем сообщение всем пользователям, кроме текущего
-                Clients.AllExcept(Context.ConnectionId).onUserConnected();
+                Clients.AllExcept(Context.ConnectionId).onUserConnected(userId);
             }
         }
 
-        // Отключение пользователя
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)
         {
             var item = Users.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
 
-            if (item != null)
+            using (var context = new MessengerDBEntities())
             {
-                Users.Remove(item);
-                Clients.All.onUserDisconnected();
+                var user = context.Users.FirstOrDefault(u => u.Id == item.Id);
+
+                user.LastSeen = "был в сети в " + DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
+
+                context.SaveChanges();
             }
+
+                if (item != null)
+                {
+                    Clients.All.onUserDisconnected(item.Id);
+                    Users.Remove(item);
+                }
 
             return base.OnDisconnected(stopCalled);
         }
