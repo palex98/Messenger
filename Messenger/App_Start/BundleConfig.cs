@@ -20,27 +20,31 @@ namespace Messenger
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/vendor/scripts").Include(
-                      "~/Content/vendor/jquery/jquery.min.js",
-                      "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"));
+                      "~/Content/vendor/jquery/jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/vendorbootstrap").Include(
                       "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/vendor/bootstrap/css/bootstrap.min.css",
+            bundles.Add(new StyleBundle("~/Content/Site").Include(
                       "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/vendorBootstrap").Include(
+                      "~/Content/vendor/bootstrap/css/bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/vendor").Include(
                       "~/Content/vendor/fontawesome-free-5.6.3-web/css/all.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/reg_style").Include(
-                      "~/Content/Reg_style.css"));
-
             bundles.Add(new StyleBundle("~/Content/login_style").Include(
                       "~/Content/Login_style.css"));
 
+            bundles.Add(new StyleBundle("~/Content/admin_style").Include(
+                      "~/Content/Admin_style.css"));
+
             bundles.Add(new ScriptBundle("~/app/scripts").Include(
                         "~/Scripts/scripts.js"));
+
+            bundles.Add(new ScriptBundle("~/app/admin").Include(
+                        "~/Scripts/admin.js"));
         }
     }
 }

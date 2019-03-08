@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Messenger</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site")
+    @Styles.Render("~/Content/vendorBootstrap")
     @Styles.Render("~/Content/vendor")
 </head>
 <body>
@@ -72,6 +73,7 @@
     </div>
 
     @Scripts.Render("~/vendor/scripts")
+    @Scripts.Render("~/bundles/vendorbootstrap")
     @Scripts.Render("~/app/scripts")
 
     <!--Ссылка на библиотеку SignalR -->

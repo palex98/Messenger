@@ -1,17 +1,95 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model List<Messenger.Models.Users>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Admin</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin page</title>
+
+    @Styles.Render("~/Content/vendorBootstrap")
+    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Content/admin_style")
+
 </head>
 <body>
-    <div> 
+
+    <div class="container-fluid">
+        <div class="top">
+            <div class="row">
+
+                <div class="col-2">
+                    <p>Admin page</p>
+                </div>
+                <div class="col-1 offset-9">
+                    <button type="button" class="btn btn-secondary">Log out</button>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="row">
+                <div class="col-6 left-part">
+                    <div class="users-list">
+                        <div class="users-list-top">
+                            <p>  Пользователи </p>
+                            <button type="button" class="btn btn-default button button-add" id="button-add" onclick="form_adding()">+</button>
+                        </div>
+                        @foreach (var user in Model)
+                        {
+                            <div class="users-list-elem">
+                                <button type="button" class="btn btn-default button button-delete" id="button-delete" onclick="DeleteUser(@user.Id)">Удалить</button>
+                                <div class="inline-block-el" onclick="form_contacts(@user.Id)">
+                                    <p>@user.UserName</p>
+                                </div>
+                                <input type="text" class="inline-block-el form-control pass-input" size="10" id="pass_@user.Id" value="@user.Password">
+                                <button type="button" class="btn btn-default button button-save" id="button-save" onclick="ChangePassword(@user.Id)">Сохранить</button>
+                                <button type="button" class="btn btn-default button button-discard" id="button-discard" onclick="ReloadPage()">Отменить</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-6 right-part">
+                    <div class="add-user-block" id="add-user-block">
+                        <form method="POST" action="/Admin/CreateUser">
+                            <div class="add-user-block-top">
+                                <p>Добавить пользователя</p>
+                            </div>
+                            <div class="add-user-block-main">
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="name-addon">Имя</span>
+                                    </div>
+                                    <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="name-addon">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="pass-addon">Пароль</span>
+                                    </div>
+                                    <input name="password" type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass-addon">
+                                </div>
+                                <div class="add-user-block-top-footer">
+                                    <input type="submit" class="btn btn-default button button-user-add" id="button-user-add" value="Добавить">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="user-contacts" id="user-contacts">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    @Scripts.Render("~/vendor/scripts")
+    @Scripts.Render("~/bundles/vendorbootstrap")
+    @Scripts.Render("~/app/admin")
 </body>
+
 </html>

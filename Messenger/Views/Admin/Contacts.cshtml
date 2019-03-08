@@ -1,0 +1,27 @@
+﻿<div class="user-contacts-top">
+    <p>Контакты пользователя <span> @ViewBag.User </span></p>
+</div>
+
+@foreach (var user in ViewBag.CheckedUsers)
+{
+    <div class="user-contacts-main">
+        <div class="form-group form-check">
+            <input type="checkbox" class="user-check" id="user-check-1" onchange="ChangeContact(@user.Id)" checked>
+            <label class="check-label" for="user-check-1">@user.UserName</label>
+        </div>
+    </div>
+}
+
+@foreach (var user in ViewBag.UncheckedUsers)
+{
+    <div class="user-contacts-main">
+        <div class="form-group form-check">
+            <input type="checkbox" class="user-check" id="user-check-1" onchange="ChangeContact(@user.Id)">
+            <label class="check-label" for="user-check-1">@user.UserName</label>
+        </div>
+    </div>
+}
+<div class="user-contacts-footer">
+    <button type="button" class="btn btn-default button button-check-save" id="button-user-add">Сохранить</button>
+    <button type="button" class="btn btn-default button button-check-cancel" id="button-user-add">Отменить</button>
+</div>

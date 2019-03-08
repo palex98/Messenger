@@ -1,0 +1,119 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top {
+    background-color: #eeeeee;
+    padding: 10px 10px;
+}
+
+.row {
+    padding: 0px 30px;
+}
+
+.left-part {
+    max-width: 700px;
+    margin-top: 10px;
+}
+
+.users-list {
+    background-color: #eeeeee;
+    padding: 10px 10px;
+}
+
+.users-list-top p {
+    display: inline-block;
+}
+
+.users-list-top {
+    text-align: center;
+    padding-right: 30px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #999;
+    color: #999;
+}
+
+    .button:hover {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: #999;
+    }
+
+.btn:focus {
+    box-shadow: 0 0 0 0 rgba(0,123,255,0) !important;
+}
+
+.button-add {
+    float: right;
+}
+
+.inline-block-el {
+    display: inline-block;
+}
+
+.pass-input {
+    max-width: 200px;
+}
+
+.users-list-elem {
+    text-align: center;
+}
+
+    .users-list-elem div p {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #0079d7;
+    }
+
+.right-part {
+    margin-top: 10px;
+    background-color: #eee;
+    display: none;
+}
+
+.add-user-block {
+    display: none;
+}
+
+.add-user-block-top {
+    border-bottom: solid 1px #282c34;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.add-user-block-main {
+    padding-top: 20px;
+}
+
+.add-user-block-top-footer {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.user-contacts-top {
+    border-bottom: solid 1px #282c34;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.user-contacts {
+    display: none;
+}
+
+.user-contacts-main {
+    padding-top: 20px;
+}
+
+.user-contacts-footer {
+    padding-bottom: 10px;
+}

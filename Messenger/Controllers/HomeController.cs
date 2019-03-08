@@ -41,7 +41,7 @@ namespace Messenger.Controllers
                     data.Add(dt);
                 }
 
-                user.LastSeen = "был в сети в" + DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
+                user.LastSeen = DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
                 context.SaveChanges();
             }
 

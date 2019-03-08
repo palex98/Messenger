@@ -37,7 +37,7 @@ namespace Messenger.Hubs
             {
                 var user = context.Users.FirstOrDefault(u => u.Id == item.Id);
 
-                user.LastSeen = "был в сети в " + DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
+                user.LastSeen = DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
 
                 context.SaveChanges();
             }
