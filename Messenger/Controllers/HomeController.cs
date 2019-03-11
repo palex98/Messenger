@@ -13,13 +13,20 @@ namespace Messenger.Controllers
     {
         public ActionResult Index(int id)
         {
+            var userFromCookies = HttpContext.Request.Cookies["user"].Value;
+
+            if (userFromCookies != id.ToString())
+            {
+                return Redirect("/");
+            }
+
             List<ChatDataToView> data = new List<ChatDataToView>();
 
             Dictionary<int, int> contacts = new Dictionary<int, int>();
 
             using (MessengerDBEntities context = new MessengerDBEntities())
             {
-                var user = context.Users.Where(u => u.Id == id).FirstOrDefault();
+                var user = context.Users.FirstOrDefault(u => u.Id == id);
 
                 try
                 {
@@ -36,7 +43,7 @@ namespace Messenger.Controllers
                     {
                         chatId = c.Value,
                         Receiver = c.Key,
-                        partnerFullName = context.Users.Where(u => u.Id == c.Key).FirstOrDefault().UserName,
+                        partnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
                     };
                     data.Add(dt);
                 }

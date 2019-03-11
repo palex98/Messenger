@@ -87,7 +87,32 @@ namespace Messenger.Controllers
                 }
                 else
                 {
+                    usersContacts1.Remove(prms.contactId);
 
+                    var newJSON1 = JsonConvert.SerializeObject(usersContacts1);
+
+                    user1.Contacts = newJSON1;
+
+                    var user2 = context.Users.FirstOrDefault(u => u.Id == prms.contactId);
+
+                    Dictionary<int, int> usersContacts2 = new Dictionary<int, int>();
+
+                    try
+                    {
+                        usersContacts2 = JsonConvert.DeserializeObject<Dictionary<int, int>>(user2.Contacts);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    usersContacts2.Remove(prms.userId);
+
+                    var newJSON2 = JsonConvert.SerializeObject(usersContacts2);
+
+                    user2.Contacts = newJSON2;
+
+                    context.SaveChanges();
                 }
             }
         }

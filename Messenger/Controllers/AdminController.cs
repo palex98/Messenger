@@ -10,6 +10,7 @@ namespace Messenger.Controllers
 {
     public class AdminController : Controller
     {
+        [Route("admin")]
         public ActionResult Index()
         {
             using (var context = new MessengerDBEntities())
@@ -38,7 +39,7 @@ namespace Messenger.Controllers
 
                 var users = context.Users.ToList();
 
-                return Redirect("/Admin/Index");
+                return Redirect("/admin");
             }
         }
 
