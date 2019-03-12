@@ -30,7 +30,7 @@ function GetMessagesFromCurrentChat() {
     $.ajax({
         type: "POST",
         url: '/Message/GetMessages',
-        data: { chatId: window.currentChatId },
+        data: { chatId: window.currentChatId, myId: window.myId },
         success: function (data) {
             $("#messageBlock").empty();
             $("#messageBlock").html(data);
@@ -42,7 +42,7 @@ function GetLastMessage(chatId) {
     $.ajax({
         type: "POST",
         url: '/Message/GetLastMessage',
-        data: { chatId: chatId },
+        data: { chatId: chatId, myId: window.myId },
         success: function (data) {
             $("#messageBlock").append(data);
         }

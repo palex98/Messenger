@@ -2,21 +2,46 @@
 
 @foreach (var m in Model)
 {
-    <div class="message">
-        <span class="message-sender">
-            @using (var context = new Messenger.Models.MessengerDBEntities())
-            {
-                @context.Users.Where(u => u.Id == m.Sender).FirstOrDefault().UserName;
-            }
-        </span>
-        <span class="message-unread-circle"></span>
-        <span class="message-text">
-            <div>
-            @m.Text
-            </div>
-        </span>
-        <span class="message-time">
-            @m.DateTime.ToShortTimeString()
-        </span>
-    </div>
+    if (m.Sender == ViewBag.myId)
+    {
+        <div class="message my-message">
+            <span class="message-sender">
+                @using (var context = new Messenger.Models.MessengerDBEntities())
+                {
+                    @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
+                    ;
+                }
+            </span>
+            <span class="message-unread-circle"></span>
+            <span class="message-text">
+                <div>
+                    @m.Text
+                </div>
+            </span>
+            <span class="message-time">
+                @m.DateTime.ToShortTimeString()
+            </span>
+        </div>
+    }
+    else
+    {
+        <div class="message not-my-message">
+            <span class="message-sender">
+                @using (var context = new Messenger.Models.MessengerDBEntities())
+                {
+                    @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
+                    ;
+                }
+            </span>
+            <span class="message-unread-circle"></span>
+            <span class="message-text">
+                <div>
+                    @m.Text
+                </div>
+            </span>
+            <span class="message-time">
+                @m.DateTime.ToShortTimeString()
+            </span>
+        </div>
+    }
 }
