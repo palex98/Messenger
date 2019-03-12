@@ -26,7 +26,7 @@ namespace Messenger.Models
         }
     
         public virtual DbSet<Chats> Chats { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Messages> Messages { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

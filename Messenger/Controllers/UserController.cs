@@ -123,7 +123,32 @@ namespace Messenger.Controllers
             {
                 var user = context.Users.FirstOrDefault(u => u.Id == prms.userId);
 
-                context.Users.Remove(user);
+                if (user != null) context.Users.Remove(user);
+
+                context.SaveChanges();
+
+                foreach (var u in context.Users)
+                {
+                    var usersContacts = new Dictionary<int, int>();
+
+                    try
+                    {
+                        usersContacts = JsonConvert.DeserializeObject<Dictionary<int, int>>(u.Contacts);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    if (usersContacts.ContainsKey(prms.userId))
+                    {
+                        usersContacts.Remove(prms.userId);
+                    }
+
+                    var newJson = JsonConvert.SerializeObject(usersContacts);
+
+                    u.Contacts = newJson;
+                }
 
                 context.SaveChanges();
             }

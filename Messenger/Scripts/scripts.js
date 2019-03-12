@@ -54,8 +54,7 @@ function SetChatterName(name) {
 }
 
 function SendMessage() {
-    if ($('#message-area').val() == '');
-    else {
+    if ($('#message-area').val() != '') {
         var text = $("#message-area").val();
         $.ajax({
             type: "POST",
@@ -67,6 +66,26 @@ function SendMessage() {
         });
         $("#message-area").val('');
     }
+}
+
+function SendFile() {
+    var files = $('input[type=file]')[0].files;
+
+    var data = new FormData();
+    for (var x = 0; x < files.length; x++) {
+        data.append("file" + x, files[x]);
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/Message/PostFileMessage",
+        contentType: false,
+        processData: false,
+        data: { data: data, sender: window.myId, chatId: window.currentChatId },
+        success: function (result) {
+            alert('urdn');
+        }
+    });
 }
 
 function ToLastMessage() {

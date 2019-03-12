@@ -22,10 +22,11 @@ namespace Messenger.Controllers
             {
                 Users user;
 
-                if (context.Users.Any(u => u.UserName == login)) {
-                    user = context.Users.FirstOrDefault(u => u.UserName == login);
+                try
+                {
+                    user = context.Users.First(u => u.UserName == login);
                 }
-                else
+                catch
                 {
                     ViewBag.ErrorMessage = "User not found!";
                     return View("Login");

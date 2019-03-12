@@ -57,14 +57,17 @@
                     <div class="message-writing text-center">
                         <div class="send-field" id="sendField" style="visibility: hidden;">
                             <form>
+                                <input type="file" name="file" id="file" onchange="SendFile()"/>
+                            </form>
+                            <form>
                                 <div>
                                     <textarea class="form-control" id="message-area"></textarea>
                                 </div>
-                                <input type="file" />
                                 <p>
                                     <input class="input-inline" id="button-send btn btn-primary" onclick="SendMessage()" type="button" value="Send">
                                 </p>
                             </form>
+
                         </div>
                     </div>
                 </div>

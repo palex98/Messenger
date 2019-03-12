@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Messenger.Controllers
@@ -116,6 +117,70 @@ namespace Messenger.Controllers
                 hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == receiver).ConnectionId).newMessage(chatId);
             }
             
+            return PartialView("Message", new List<Messages> { newMessage });
+        }
+
+        [HttpPost]
+        public ActionResult PostFileMessage(int sender, int chatId)
+        {
+            Messages newMessage = new Messages
+            {
+                Text = "file",
+                Sender = sender,
+                ChatId = chatId,
+                DateTime = DateTime.Now,
+                IsReaded = false
+            };
+
+            foreach (string file in Request.Files)
+            {
+                var upload = Request.Files[file];
+                if (upload != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(upload.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Files/" + fileName));
+                }
+            }
+
+            int receiver;
+
+            using (MessengerDBEntities context = new MessengerDBEntities())
+            {
+                var addedMessage = context.Messages.Add(newMessage);
+                context.SaveChanges();
+
+                var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
+
+                receiver = sender == chat.Sender ? chat.Receiver : chat.Sender;
+
+                List<int> listOfMessages = new List<int>();
+
+                try
+                {
+                    listOfMessages = JsonConvert.DeserializeObject<List<int>>(chat.ListOfMessages);
+                }
+                catch
+                {
+
+                }
+
+                listOfMessages.Add(addedMessage.Id);
+
+                var json = JsonConvert.SerializeObject(listOfMessages);
+
+                chat.ListOfMessages = json;
+
+                context.SaveChanges();
+            }
+
+            if (MessengerHub.Users.Exists(u => u.Id == receiver))
+            {
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<MessengerHub>();
+                hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == receiver).ConnectionId).newMessage(chatId);
+            }
+
             return PartialView("Message", new List<Messages> { newMessage });
         }
     }

@@ -36,11 +36,9 @@ namespace Messenger.Controllers
                     context.Users.Add(newUser);
                     context.SaveChanges();
                 }
-
-                var users = context.Users.ToList();
-
-                return Redirect("/admin");
             }
+
+            return Redirect("/admin");
         }
 
         [HttpGet]
@@ -48,13 +46,13 @@ namespace Messenger.Controllers
         {
             using (var context = new MessengerDBEntities())
             {
-                var usersContactsJSON = context.Users.FirstOrDefault(u => u.Id == userId).Contacts;
+                var usersContactsJson = context.Users.FirstOrDefault(u => u.Id == userId).Contacts;
 
-                Dictionary<int, int> usersContacts = new Dictionary<int, int>();
+                var usersContacts = new Dictionary<int, int>();
 
                 try
                 {
-                    usersContacts = JsonConvert.DeserializeObject<Dictionary<int, int>>(usersContactsJSON);
+                    usersContacts = JsonConvert.DeserializeObject<Dictionary<int, int>>(usersContactsJson);
                 }
                 catch
                 {
