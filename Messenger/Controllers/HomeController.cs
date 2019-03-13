@@ -1,6 +1,5 @@
 ﻿using Messenger.Models;
 using Messenger.Models.Custom;
-using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -41,9 +40,9 @@ namespace Messenger.Controllers
                 {
                     ChatDataToView dt = new ChatDataToView
                     {
-                        chatId = c.Value,
+                        ChatId = c.Value,
                         Receiver = c.Key,
-                        partnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
+                        PartnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
                     };
                     data.Add(dt);
                 }
@@ -60,9 +59,9 @@ namespace Messenger.Controllers
         [HttpGet]
         public FileResult GetFile(string file)
         {
-            string file_path = Server.MapPath("~/Files/" + file);
-            string file_name = file;
-            return File(file_path, "application", file_name);
+            string filePath = Server.MapPath("~/Files/" + file);
+
+            return File(filePath, "application", file);
         }
     }
 }

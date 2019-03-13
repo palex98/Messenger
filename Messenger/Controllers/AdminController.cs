@@ -22,19 +22,22 @@ namespace Messenger.Controllers
 
         public RedirectResult CreateUser(string username, string password)
         {
-            using (var context = new MessengerDBEntities())
+            if (username != "" || username != " ")
             {
-                if (!context.Users.Any(u => u.UserName == username))
+                using (var context = new MessengerDBEntities())
                 {
-                    var newUser = new Users
+                    if (!context.Users.Any(u => u.UserName == username))
                     {
-                        UserName = username,
-                        Password = password,
-                        LastSeen = " "
-                    };
+                        var newUser = new Users
+                        {
+                            UserName = username,
+                            Password = password,
+                            LastSeen = ""
+                        };
 
-                    context.Users.Add(newUser);
-                    context.SaveChanges();
+                        context.Users.Add(newUser);
+                        context.SaveChanges();
+                    }
                 }
             }
 
@@ -72,7 +75,7 @@ namespace Messenger.Controllers
 
                 foreach (var user in context.Users)
                 {
-                    if(!checkedUsers.Exists(u => u == user) && user.Id != userId)
+                    if (!checkedUsers.Exists(u => u == user) && user.Id != userId)
                     {
                         uncheckedUsers.Add(user);
                     }

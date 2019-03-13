@@ -3,11 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    @Styles.Render("~/Content/vendorBootstrap")
     @Styles.Render("~/Content/login_style")
+    @Scripts.Render("~/scripts/bootstrap")
     <title>Login_form</title>
 </head>
 <body>
@@ -31,18 +29,6 @@
                 <p style="color: red;">@ViewBag.ErrorMessage</p>
                 }
             </div>
-            @*<div>
-                <button class="btn btn-lg btn-primary btn-block btn-google" type="submit">
-                    <a href="#" class="google ">
-                        <i class="fab fa-google-plus"></i>
-                    </a>
-                </button>
-                <button class="btn btn-lg btn-primary btn-block btn-facebook " type="submit">
-                    <a href="#" class="facebook ">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </button>
-            </div>*@
         </form>
     </div>
 </body>

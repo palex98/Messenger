@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Messenger.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Messenger.Models;
 
 namespace Messenger.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
         public ActionResult Login()
         {
 

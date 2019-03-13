@@ -202,7 +202,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Custom\ChatDataToView.cs" />
-    <Compile Include="Models\Custom\Contact.cs" />
     <Compile Include="Models\Messages.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
