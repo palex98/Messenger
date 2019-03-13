@@ -85,7 +85,8 @@ function SendFile() {
         contentType: false,
         processData: false,
         data: data,
-        success: function (result) {
+        success: function (data) {
+            $("#messageBlock").append(data);
             alert("Файл успешно отправлен!");
         },
         error: function (result) {

@@ -120,7 +120,9 @@ namespace Messenger.Controllers
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<MessengerHub>();
                 hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == receiver).ConnectionId).newMessage(chatId);
             }
-            
+
+            ViewBag.myId = sender;
+
             return PartialView("Message", new List<Messages> { newMessage });
         }
 
@@ -190,6 +192,8 @@ namespace Messenger.Controllers
                 var hubContext = GlobalHost.ConnectionManager.GetHubContext<MessengerHub>();
                 hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == receiver).ConnectionId).newMessage(chatId);
             }
+
+            ViewBag.myId = sender;
 
             return PartialView("Message", new List<Messages> { newMessage });
         }
