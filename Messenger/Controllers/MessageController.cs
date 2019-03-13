@@ -13,13 +13,13 @@ namespace Messenger.Controllers
     public class MessageController : Controller
     {
         [HttpPost]
-        public ActionResult GetMessages(int chatId)
+        public ActionResult GetMessages(int chatId, int myId)
         {
             List<Messages> listOfMessages = new List<Messages>();
 
             using (MessengerDBEntities context = new MessengerDBEntities())
             {
-                var chat = context.Chats.Where(c => c.Id == chatId).FirstOrDefault();
+                var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
 
                 List<int> messagesId = new List<int>();
                 try
@@ -33,17 +33,19 @@ namespace Messenger.Controllers
 
                 foreach (var id in messagesId)
                 {
-                    listOfMessages.Add(context.Messages.Where(i => i.Id == id).FirstOrDefault());
+                    listOfMessages.Add(context.Messages.FirstOrDefault(i => i.Id == id));
                 }
             }
 
             if (listOfMessages.Count > 20) listOfMessages = listOfMessages.Skip(listOfMessages.Count - 20).ToList();
 
+            ViewBag.myId = myId;
+
             return PartialView("Message", listOfMessages);
         }
 
         [HttpPost]
-        public ActionResult GetLastMessage(int chatId)
+        public ActionResult GetLastMessage(int chatId, int myId)
         {
             List<Messages> message = new List<Messages>();
 
@@ -64,6 +66,8 @@ namespace Messenger.Controllers
 
                 message.Add(context.Messages.FirstOrDefault(i => i.Id == messageId));
             }
+
+            ViewBag.myId = myId;
 
             return PartialView("Message", message);
         }
