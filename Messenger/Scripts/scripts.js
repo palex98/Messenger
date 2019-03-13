@@ -76,14 +76,20 @@ function SendFile() {
         data.append("file" + x, files[x]);
     }
 
+    data.append("myId", window.myId);
+    data.append("chatId", window.currentChatId);
+
     $.ajax({
         type: "POST",
         url: "/Message/PostFileMessage",
         contentType: false,
         processData: false,
-        data: { data: data, sender: window.myId, chatId: window.currentChatId },
+        data: data,
         success: function (result) {
-            alert('urdn');
+            alert("Файл успешно отправлен!");
+        },
+        error: function (result) {
+            alert("Ошибка при отправке файла!");
         }
     });
 }

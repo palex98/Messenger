@@ -56,5 +56,13 @@ namespace Messenger.Controllers
 
             return View(data);
         }
+
+        [HttpGet]
+        public FileResult GetFile(string file)
+        {
+            string file_path = Server.MapPath("~/Files/" + file);
+            string file_name = file;
+            return File(file_path, "application", file_name);
+        }
     }
 }

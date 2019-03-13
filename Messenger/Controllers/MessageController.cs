@@ -121,11 +121,17 @@ namespace Messenger.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostFileMessage(int sender, int chatId)
+        public ActionResult PostFileMessage()
         {
+
+            int sender = Convert.ToInt32(Request.Form.Get("myId"));
+            int chatId = Convert.ToInt32(Request.Form.Get("chatId"));
+
+            string text = "<a href=\"" + "../../Home/GetFile/?file=" + Request.Files[0].FileName + "\">" + Request.Files[0].FileName + "</a>";
+
             Messages newMessage = new Messages
             {
-                Text = "file",
+                Text = text,
                 Sender = sender,
                 ChatId = chatId,
                 DateTime = DateTime.Now,
