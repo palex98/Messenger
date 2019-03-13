@@ -1,45 +1,71 @@
 ﻿@model List<Messenger.Models.Messages>
-
+<div class="d-flex justify-content-center">
+    <button class="message-download-button btn btn-primary">Загрузить еще</button>
+</div>
 @foreach (var m in Model)
 {
+
     if (m.Sender == ViewBag.myId)
     {
-        <div class="message my-message">
-            <span class="message-sender">
-                @using (var context = new Messenger.Models.MessengerDBEntities())
-                {
-                    @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
-                }
-            </span>
-            <span class="message-unread-circle"></span>
-            <span class="message-text">
-                <div>
-                    @Html.Raw(m.Text)
+        <div class="message my-message container-fluid">
+            <div class="row no-gutter">
+                <div class="col-3">
+                    <span class="message-sender">
+                        @using (var context = new Messenger.Models.MessengerDBEntities())
+                        {
+                            @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
+                        }
+                    </span>
                 </div>
-            </span>
-            <span class="message-time">
-                @m.DateTime.ToShortTimeString()
-            </span>
+                <div class="col-7">
+                    <span class="message-text-full">
+                        <span class="message-unread-circle"></span>
+
+                        <span class="message-text">
+                            <div>
+                                @Html.Raw(m.Text)
+                            </div>
+                        </span>
+                    </span>
+                </div>
+                <div class="col-2">
+                    <span class="message-time">
+                        @m.DateTime.ToLocalTime().ToString("HH:mm dd.MM.yyyy")
+                    </span>
+                </div>
+            </div>
         </div>
+
+
+
     }
     else
     {
-        <div class="message not-my-message">
-            <span class="message-sender">
-                @using (var context = new Messenger.Models.MessengerDBEntities())
-                {
-                    @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
-                }
-            </span>
-            <span class="message-unread-circle"></span>
-            <span class="message-text">
-                <div>
-                    @Html.Raw(m.Text)
+        <div class="message not-my-message container-fluid">
+            <div class="row no-gutter">
+                <div class="col-3">
+                    <span class="message-sender">
+                        @using (var context = new Messenger.Models.MessengerDBEntities())
+                        {
+                            @context.Users.FirstOrDefault(u => u.Id == m.Sender).UserName
+                        }
+                    </span>
                 </div>
-            </span>
-            <span class="message-time">
-                @m.DateTime.ToShortTimeString()
-            </span>
+                <div class="col-7">
+                    <span class="message-unread-circle"></span>
+
+                    <span class="message-text">
+                        <div>
+                            @Html.Raw(m.Text)
+                        </div>
+                    </span>
+                </div>
+                <div class="col-2">
+                    <span class="message-time">
+                        @m.DateTime.ToLocalTime().ToString("HH:mm dd.MM.yyyy")
+                    </span>
+                </div>
+            </div>
         </div>
     }
 }

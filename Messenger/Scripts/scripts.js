@@ -1,10 +1,13 @@
-﻿function ClickOnChat(chatId, receiver, name) {
+﻿
+function ClickOnChat(chatId, receiver, name) {
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         window.currentReceiver = receiver;
         SetChatterName(name);
         GetMessagesFromCurrentChat();
         GetUserStatus(receiver);
+        $(".spinner-border").css('visibility', 'visible');
+
     }
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
@@ -12,7 +15,8 @@
     $(".block-chatter").removeClass('active-chatter');
     $("#" + chatId).toggleClass("active-chatter");
     $("#" + chatId + " .chat-counter").text("0");
-    $("#" + chatId + " .chat-counter").css('visibility', 'hidden');
+    $("#" + chatId + " .chat-counter").css('visibility', 'hidden'); 
+    
 }
 
 function GetUserStatus(userId) {
@@ -34,7 +38,10 @@ function GetMessagesFromCurrentChat() {
         success: function (data) {
             $("#messageBlock").empty();
             $("#messageBlock").html(data);
+            $(".spinner-border").css('visibility', 'hidden');
+              ToLastMessage();
         }
+
     });
 }
 
@@ -45,6 +52,7 @@ function GetLastMessage(chatId) {
         data: { chatId: chatId, myId: window.myId },
         success: function (data) {
             $("#messageBlock").append(data);
+            ToLastMessage();
         }
     });
 }
@@ -62,9 +70,11 @@ function SendMessage() {
             data: { text: text, sender: window.myId, chatId: window.currentChatId },
             success: function (data) {
                 $("#messageBlock").append(data);
+                ToLastMessage();
             }
         });
         $("#message-area").val('');
+
     }
 }
 
@@ -88,10 +98,12 @@ function SendFile() {
         success: function (data) {
             $("#messageBlock").append(data);
             alert("Файл успешно отправлен!");
+            ToLastMessage();
         },
         error: function (result) {
             alert("Ошибка при отправке файла!");
         }
+
     });
 }
 
@@ -121,4 +133,17 @@ function getCookie(cname) {
         }
     }
     return "";
-}
+};
+
+function SoundClick() {
+    var sound_color = $("#sound-link").html();
+    console.log(sound_color);
+    if (sound_color == "Sound on") {
+        $("#sound-link").html("Sound off");
+        $("#sound-link").css('color', '#f23c34');
+    }
+    else {
+        $("#sound-link").html("Sound on");
+        $("#sound-link").css('color', "#75c12a");
+    }
+};

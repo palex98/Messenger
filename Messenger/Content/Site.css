@@ -1,16 +1,26 @@
-﻿body {
-    font-size: 18px;
+﻿html,body {
+    font-size: 14px;
+    height: 100%;
 }
+
 
 .header {
     background-color: #252845;
 }
 
-.footer-el {
+.top-part{
+    height:7vh;
+}
+
+.left-col{
+    height:100vh;
+}
+
+.header-el {
     color: #fff;
 }
 
-    .footer-el:hover {
+    .header-el:hover {
         text-decoration: none;
         color: #fff;
     }
@@ -20,9 +30,6 @@
     padding-left: auto;
 }
 
-.settings-block:hover {
-    background-color: #191c39;
-}
 
 .padding-10 {
     padding-top: 10px;
@@ -30,9 +37,30 @@
     color: #ccc;
 }
 
-.chatters {
-    background-color: #f9f9fa;
+.message-download-button {
+    margin-top: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #f9f9fa !important;
+    color: #252845 !important;
 }
+
+.sound-button{
+    min-width: 84px;
+}
+
+.sound-link {
+    color: #75c12a ;
+}
+
+ .sound-link:hover {
+      text-decoration: none;
+      color: #75c12a;
+    }
+
+.chatters {
+        background-color: #f9f9fa;
+    }
 
 .block-chatter-full {
 }
@@ -40,36 +68,45 @@
 .block-chatter {
     height: 60px;
     color: #777777;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 10px;
 }
 
     .block-chatter:hover {
         background-color: #f0f0f1;
     }
 
-.img-user {
-    width: 50px;
-    height: 50px;
-    border: solid #707070 1px;
-    display: inline-block;
-    border-radius: 25px;
-    position: relative;
-    top: 5px;
-}
 
 .name-in-panel {
     position: relative;
     top: -5px;
+    max-width: 80%;
+
+}
+
+.spinner-border{
+    visibility: hidden;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.clip {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chat-counter {
-    position: relative;
-    left: 180px;
-    bottom: 58px;
+    position:absolute;
+    right:10px;
     width: 40px;
     height: 40px;
     line-height: 40px;
     background: #9db8c6;
-    margin: 1em;
     border-radius: 50%;
     text-align: center;
     visibility: hidden;
@@ -83,93 +120,126 @@
 .message-col {
     border-left: solid #707070 3px;
     font-size: 18px;
-    height: 500px;
+    height:  90vh;
+}
+
+.my-message {
+    background-color: #f0f4f7;
+}
+
+.not-my-message {
+    background-color: #e8e8e8;
 }
 
 .message {
-    padding: 0px 40px;
-    margin: 0px 0px;
+    padding: 10px 20px;
+    margin: 10px 0px;
     color: #111111;
+    border-radius:10px;
 }
 
-    .message:hover {
-        background-color: #eeeeee;
-    }
+  
 
 .message-sender {
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     color: #555555;
-    width: 80px;
+    word-wrap: break-word;
+    width: 110%;
+}
+
+.message-text-full{
+    width:110%;
 }
 
 .message-text {
     display: inline-block;
-    width: 430px;
-    margin-left: 100px;
+    width:90%;
 }
 
 .message-unread-circle {
     display: inline-block;
-    width: 5px;
+    float: left;
+    width: 1%;
+    min-width:5px;
     height: 5px;
     background-color: darkblue;
     border-radius: 5px;
-    visibility: hidden;
+    margin: 10px 10px; 
+
 }
 
 
 .message-text div {
     word-wrap: break-word;
-    width: 430px;
+    font-size: 16px;
+    display: inline-block;
 }
 
 .message-time {
     display: inline-block;
-    margin-left: 30px;
-    position: relative;
-    left: 50px;
-    margin: 0px 0px;
-    padding: 0px 0px;
+    font-size:13px;
 }
-
+   
 .message-writing {
     font-size: 20px;
+    height: 10vh;
+}
+
+.bottom-container{
+    margin-top: 10px;
 }
 
 .form-control {
-    position: absolute;
     bottom: 0px;
     left: 30px;
     display: inline-block;
-    width: 600px;
     resize: none;
 }
 
 .input-inline {
     display: inline-block;
-    position: absolute;
-    bottom: 30px;
-    right: 60px;
     background-color: #191C39;
     color: #FFFFD9;
-    border-radius: 30px;
+    border-radius: 5px;
     width: 100px;
+    position: absolute;
+    bottom: 10px;
+    right:140px;
 }
 
-input[type="file"] {
+.upload-button {
+    position: absolute;
+    right: 40px;
+    display: inline-block;
+    background-color: #6c757d;
+    border-radius: 5px;
     font-size: 10px;
-    position: relative;
-    left: 315px;
-    top: 10px;
+    width: 70px;
+    color:white;
+}
+
+.upload-button:hover{
+    cursor: pointer;
+} 
+
+input[type="file"] {
+    display: inline-block;
+    opacity: 0;
+    z-index: -1;
 }
 
 .input-inline:hover {
     background-color: #101030;
 }
 
-.overflow-auto {
-    height: 400px;
+.overflow-90 {
+    height: 90vh;
+    overflow: auto !important;
+}
+
+.overflow-80 {
+    height: 80vh;
     overflow: auto !important;
 }
 
@@ -200,3 +270,4 @@ input[type="file"] {
 .no-padding-left {
     padding-left: 0 !important;
 }
+
