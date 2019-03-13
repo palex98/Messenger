@@ -9,7 +9,7 @@ function form_contacts(userId) {
 
     $.ajax({
         type: "GET",
-        url: '/Admin/GetContacts',
+        url: "/Admin/GetContacts",
         data: { userId: userId },
         success: function (data) {
             $("#user-contacts").html(data);
@@ -24,7 +24,7 @@ function form_contacts(userId) {
 function DeleteUser(userId) {
     $.ajax({
         type: "DELETE",
-        url: '/api/User',
+        url: "/api/User",
         data: { userId: userId },
         success: function () {
             ReloadPage();
@@ -37,7 +37,7 @@ function ChangePassword(userId) {
 
     $.ajax({
         type: "PUT",
-        url: '/api/User',
+        url: "/api/User",
         data: { userId: userId, password: password },
         success: function () {
             ReloadPage();
@@ -52,7 +52,7 @@ function ReloadPage() {
 function ChangeContact(contactId) {
     $.ajax({
         type: "POST",
-        url: '/api/User',
+        url: "/api/User",
         data: { userId: window.currentUser, contactId: contactId }
     });
 }

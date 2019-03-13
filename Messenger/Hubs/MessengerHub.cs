@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Messenger.Models;
+using Microsoft.AspNet.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Messenger.Models;
-using Microsoft.AspNet.SignalR;
 
 namespace Messenger.Hubs
 {

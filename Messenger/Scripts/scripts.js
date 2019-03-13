@@ -6,6 +6,11 @@
         GetMessagesFromCurrentChat();
         GetUserStatus(receiver);
     }
+
+    if ($("#" + chatId + " .chat-counter").text() != "0") {
+        ReadMessages();
+    }
+
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
     $("#plsSelectLabel").css("visibility", "hidden");
@@ -18,7 +23,7 @@
 function GetUserStatus(userId) {
     $.ajax({
         type: "GET",
-        url: '/api/User',
+        url: "/api/User",
         data: { userId: userId },
         success: function (data) {
             $("#lastSeen").text(data);
@@ -29,7 +34,7 @@ function GetUserStatus(userId) {
 function GetMessagesFromCurrentChat() {
     $.ajax({
         type: "POST",
-        url: '/Message/GetMessages',
+        url: "/Message/GetMessages",
         data: { chatId: window.currentChatId, myId: window.myId },
         success: function (data) {
             $("#messageBlock").empty();
@@ -41,7 +46,7 @@ function GetMessagesFromCurrentChat() {
 function GetLastMessage(chatId) {
     $.ajax({
         type: "POST",
-        url: '/Message/GetLastMessage',
+        url: "/Message/GetLastMessage",
         data: { chatId: chatId, myId: window.myId },
         success: function (data) {
             $("#messageBlock").append(data);
@@ -58,12 +63,13 @@ function SendMessage() {
         var text = $("#message-area").val();
         $.ajax({
             type: "POST",
-            url: '/Message/PostMessage',
+            url: "/Message/PostMessage",
             data: { text: text, sender: window.myId, chatId: window.currentChatId },
             success: function (data) {
                 $("#messageBlock").append(data);
             }
         });
+
         $("#message-area").val('');
     }
 }
@@ -72,9 +78,8 @@ function SendFile() {
     var files = $('input[type=file]')[0].files;
 
     var data = new FormData();
-    for (var x = 0; x < files.length; x++) {
-        data.append("file" + x, files[x]);
-    }
+
+    data.append("file" + x, files[0]);
 
     data.append("myId", window.myId);
     data.append("chatId", window.currentChatId);
@@ -100,12 +105,13 @@ function ToLastMessage() {
     div.scrollTop(div.prop('scrollHeight'));
 }
 
-$('#message-area').on('keypress', function (e) {
-    if (e.which == 13) {
-        e.preventDefault();
-        SendMessage();
-    }
-})
+$('#message-area').on('keypress',
+    function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            SendMessage();
+        }
+    });
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -121,4 +127,17 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function ReadMessages() {
+    $.ajax({
+        type: "POST",
+        url: '/Message/ReadMessages',
+        data: { userId: window.myId, chatId: window.currentChatId },
+        success: function () {
+            $(".message-unread-circle").each(function () {
+                $(this).removeClass("message-unread-circle");
+            });
+        }
+    });
 }
