@@ -23,6 +23,8 @@
             counter++;
             $("#" + chatId + " .chat-counter").text(counter);
         }
+
+        if(window.sound) NotificationSound();
     };
 
     messenger.client.readMessages = function (chatId) {

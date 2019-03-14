@@ -1,4 +1,6 @@
-﻿function ClickOnChat(chatId, receiver, name) {
+﻿var notification = new Audio("/Content/notification_sound.wav");
+
+function ClickOnChat(chatId, receiver, name) {
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         window.currentReceiver = receiver;
@@ -141,15 +143,15 @@ function getCookie(cname) {
 }
 
 function SoundClick() {
-    var sound_color = $("#sound-link").html();
-    console.log(sound_color);
-    if (sound_color == "Sound on") {
-        $("#sound-link").html("Sound off");
+    if (window.sound == true) {
+        $("#sound-link").html("Звук выкл.");
         $("#sound-link").css('color', '#f23c34');
+        window.sound = false;
     }
     else {
-        $("#sound-link").html("Sound on");
+        $("#sound-link").html("Звук вкл.");
         $("#sound-link").css('color', "#75c12a");
+        window.sound = true;
     }
 }
 
@@ -164,4 +166,8 @@ function ReadMessages() {
             });
         }
     });
+}
+
+function NotificationSound() {
+    notification.play();
 }
