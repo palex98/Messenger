@@ -270,3 +270,6 @@ input[type="file"] {
     padding-left: 0 !important;
 }
 
+#loadButton {
+    visibility: hidden;
+}

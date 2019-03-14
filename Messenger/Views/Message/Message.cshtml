@@ -1,7 +1,5 @@
 ﻿@model List<Messenger.Models.Messages>
-<div class="d-flex justify-content-center">
-    <button class="message-download-button btn btn-primary">Загрузить еще</button>
-</div>
+
 @foreach (var m in Model)
 {
 
@@ -19,7 +17,15 @@
                 </div>
                 <div class="col-7">
                     <span class="message-text-full">
-                        <span class="message-unread-circle"></span>
+
+                        @if (m.IsReaded)
+                        {
+                            <span class=""></span>
+                        }
+                        else
+                        {
+                            <span class="message-unread-circle"></span>
+                        }
 
                         <span class="message-text">
                             <div>
@@ -49,7 +55,15 @@
                     </span>
                 </div>
                 <div class="col-7">
-                    <span class="message-unread-circle"></span>
+
+                    @if (m.IsReaded)
+                    {
+                        <span class=""></span>
+                    }
+                    else
+                    {
+                        <span class="message-unread-circle"></span>
+                    }
 
                     <span class="message-text">
                         <div>

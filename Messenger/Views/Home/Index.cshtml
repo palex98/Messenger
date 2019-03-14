@@ -9,101 +9,97 @@
     <meta name="author" content="">
     <title>Messenger</title>
     @Styles.Render("~/Content/Site")
-    @Styles.Render("~/Content/vendorBootstrap")
-    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Content/Bootstrap")
 </head>
 <body>
-        <div class="container">
-            <div class="header">
-                <div class="row">
-                    <div class="col-1 text-center padding-10">
-                            Logo
-                    </div>
-                    <div class="col-2 text-center settings-block padding-10">
-                        <div class="btn btn-secondary sound-button" id="sound-button" onclick="SoundClick()">
-                            <a href="#" class="sound-link" id="sound-link">
-                                Sound on
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-7 settings-block padding-10">
-                        <a href="#" class="header-el" id="chatterName"></a>
-                        <div style="display: inline-block; visibility: hidden;" id="lastSeenBlock">
-                            <span id="lastSeen"></span>
-                        </div>
-                    </div>
-                    <div class="col-2 padding-10">
-                        <button type="button" class="btn btn-secondary">Log out</button>
+    <div class="container">
+        <div class="header">
+            <div class="row">
+                <div class="col-1 text-center padding-10">
+                    Logo
+                </div>
+                <div class="col-2 text-center settings-block padding-10">
+                    <div class="btn btn-secondary sound-button" id="sound-button" onclick="SoundClick()">
+                        <a href="#" class="sound-link" id="sound-link">
+                            Sound on
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="main-part chatters">
-                <div class="row">
-                    <div class="col-3 no-padding-right">
-                        <div id="left-col" class="left-col overflow-90">
-                            @foreach (var chat in Model)
-                            {
-                                <div class="block-chatter" id="@chat.chatId" onclick="ClickOnChat(@chat.chatId, @chat.Receiver, '@chat.partnerFullName')">
-                                    <span class="name-in-panel"><p class="clip">@chat.partnerFullName</p></span>
-                                    <div class="chat-counter">0</div>
-                                </div>
-                            }
-                        </div>
+                <div class="col-7 settings-block padding-10">
+                    <a href="#" class="header-el" id="chatterName"></a>
+                    <div style="display: inline-block; visibility: hidden;" id="lastSeenBlock">
+                        <span id="lastSeen"></span>
                     </div>
-                    <div class="col-9 message-col no-padding-left">
-                        <div id="right-col" class="overflow-80">
-                            <div class="d-flex justify-content-center">
-                                <div class="spinner-border text-dark" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                </div>
-                            </div>
-                                <div id="messageBlock">
-                                    <h3 id="plsSelectLabel">Pls, select chat to write a message...</h3>
-                                </div>
-                            </div>
-                            <div class="message-writing text-center">
-                                <div class="send-field" id="sendField" style="visibility: hidden;">
-                                    <form>
-                                        <div class="container bottom-container">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <div>
-                                                        <textarea class="form-control" id="message-area" placeholder="Write a message.."></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="file" class="upload-button">Загрузить файл</label>                                         
-                                                    <input type="file" name="file" id="file" onchange="SendFile()" />
-                                                    
-                                                        <input class="input-inline" id="button-send btn btn-primary" onclick="SendMessage()" type="button" value="Send">
-                                                  
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-2 padding-10">
+                    <button type="button" class="btn btn-secondary">Log out</button>
                 </div>
             </div>
         </div>
+        <div class="main-part chatters">
+            <div class="row">
+                <div class="col-3 no-padding-right">
+                    <div id="left-col" class="left-col overflow-90">
+                        @foreach (var chat in Model)
+                        {
+                            <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">
+                                <span class="name-in-panel"><p class="clip">@chat.PartnerFullName</p></span>
+                                <div class="chat-counter">0</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-9 message-col no-padding-left">
+                    <div id="right-col" class="overflow-80">
+                        <div class="d-flex justify-content-center" id="loadButton">
+                            <button class="message-download-button btn btn-primary">Загрузить еще</button>
+                        </div>
+                        <div id="messageBlock">
+                            <div class="d-flex justify-content-center">
+                                <h3 id="plsSelectLabel">Выберите собеседника, чтобы написать сообщение...</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-writing text-center">
+                        <div class="send-field" id="sendField" style="visibility: hidden;">
+                            <form>
+                                <div class="container bottom-container">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div>
+                                                <textarea class="form-control" id="message-area" placeholder="Write a message.."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="file" class="upload-button">Отправить файл</label>
+                                            <input type="file" name="file" id="file" onchange="SendFile()" />
 
-        @Scripts.Render("~/vendor/scripts")
-        @Scripts.Render("~/bundles/vendorbootstrap")
-        @Scripts.Render("~/app/scripts")
+                                            <input class="input-inline" id="button-send btn btn-primary" onclick="SendMessage()" type="button" value="Отпр.">
 
-        <!--Ссылка на библиотеку SignalR -->
-        <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
-        <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
-        <script src="~/signalr/hubs"></script>
-        <script src="~/Scripts/util.js"></script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
-        <script type="text/javascript">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/vendor/scripts")
+    @Scripts.Render("~/app/scripts")
+
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/util.js"></script>
+
+    <script type="text/javascript">
         window.onload = function () {
             window.myId = @ViewBag.MyId;
         };
-        </script>
+    </script>
 
 </body>
 </html>

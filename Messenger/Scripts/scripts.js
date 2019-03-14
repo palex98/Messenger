@@ -2,17 +2,17 @@
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         window.currentReceiver = receiver;
+        $("#loadButton").css("visibility", "hidden");
         SetChatterName(name);
         GetMessagesFromCurrentChat();
         GetUserStatus(receiver);
-        $(".spinner-border").css('visibility', 'visible');
-
     }
 
     if ($("#" + chatId + " .chat-counter").text() != "0") {
         ReadMessages();
     }
 
+    $("#messageBlock").html('<div class="d-flex justify-content-center"><span>Загрузка...</span></div>');
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
     $("#plsSelectLabel").css("visibility", "hidden");
@@ -42,8 +42,8 @@ function GetMessagesFromCurrentChat() {
         success: function (data) {
             $("#messageBlock").empty();
             $("#messageBlock").html(data);
-            $(".spinner-border").css('visibility', 'hidden');
-              ToLastMessage();
+            ToLastMessage();
+            $("#loadButton").css("visibility", "visible");
         }
 
     });
@@ -88,7 +88,7 @@ function SendFile() {
 
     var data = new FormData();
 
-    data.append("file" + x, files[0]);
+    data.append("file", files[0]);
 
     data.append("myId", window.myId);
     data.append("chatId", window.currentChatId);
