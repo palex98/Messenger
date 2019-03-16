@@ -233,6 +233,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Login_style.css" />
+    <Content Include="Content\notification_sound.wav" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
