@@ -10,17 +10,24 @@ namespace Messenger.Controllers
 {
     public class AdminController : Controller
     {
-        [Route("admin")]
-        public ActionResult Index()
+        public ActionResult Index(bool sdihwe89f43tb2sdbf3tb12dw)
         {
-            using (var context = new MessengerDBEntities())
+            if (sdihwe89f43tb2sdbf3tb12dw)
             {
-                var users = context.Users.ToList();
-                return View("Admin", users);
+                using (var context = new MessengerDBEntities())
+                {
+                    var users = context.Users.ToList();
+                    return View("Admin", users);
+                }
             }
+            else
+            {
+                return Redirect("/");
+            }
+
         }
 
-        public RedirectResult CreateUser(string username, string password)
+        public ActionResult CreateUser(string username, string password)
         {
             if (username != "" || username != " ")
             {
@@ -41,7 +48,7 @@ namespace Messenger.Controllers
                 }
             }
 
-            return Redirect("/admin");
+            return RedirectToAction("Index", "Admin", new { sdihwe89f43tb2sdbf3tb12dw = true });
         }
 
         [HttpGet]

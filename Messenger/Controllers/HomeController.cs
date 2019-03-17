@@ -38,11 +38,17 @@ namespace Messenger.Controllers
 
                 foreach (var c in contacts)
                 {
+                    var messages = context.Messages.Where(m => m.ChatId == c.Value && m.Sender != id && !m.IsReaded);
+
+                    int unresded = messages.Count();
+
                     ChatDataToView dt = new ChatDataToView
                     {
                         ChatId = c.Value,
                         Receiver = c.Key,
                         PartnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
+                        LastMessage = context.Chats.FirstOrDefault(ch => ch.Id == c.Value).LastMessage,
+                        Unreaded = unresded
                     };
                     data.Add(dt);
                 }
@@ -52,6 +58,10 @@ namespace Messenger.Controllers
             }
 
             ViewBag.MyId = id;
+
+            data = data.OrderBy(d => d.LastMessage).ToList();
+
+            data.Reverse();
 
             return View(data);
         }

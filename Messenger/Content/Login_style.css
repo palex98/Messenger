@@ -57,18 +57,7 @@ input::-moz-placeholder { /* Firefox 19+ */
     box-shadow: none;
 }
 
-.fa-google-plus {
-    font-size: 35px;
-    color: #cc463a;
-    margin-top: 10px;
-}
 
-.fa-facebook-f {
-    font-size: 35px;
-    margin-left: 10px;
-    color: #28478a;
-    margin-top: 10px;
-}
 
 .btn-google {
     margin-top: 10px;

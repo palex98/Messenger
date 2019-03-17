@@ -21,6 +21,11 @@ function form_contacts(userId) {
     $('#user-contacts').css('display', 'block');
 }
 
+function CloseContactsForm() {
+    $('.right-part').css('display', 'none');
+    $('#user-contacts').css('display', 'none');
+}
+
 function DeleteUser(userId) {
     $.ajax({
         type: "DELETE",

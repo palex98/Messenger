@@ -4,17 +4,19 @@ function ClickOnChat(chatId, receiver, name) {
     if (chatId != window.currentChatId) {
         window.currentChatId = chatId;
         window.currentReceiver = receiver;
+        window.messageCounter = 20;
         $("#loadButton").css("visibility", "hidden");
         SetChatterName(name);
         GetMessagesFromCurrentChat();
         GetUserStatus(receiver);
+        $("#messageBlock").html('<div class="d-flex justify-content-center"><span>Загрузка...</span></div>');
+        
     }
 
     if ($("#" + chatId + " .chat-counter").text() != "0") {
         ReadMessages();
     }
 
-    $("#messageBlock").html('<div class="d-flex justify-content-center"><span>Загрузка...</span></div>');
     $("#lastSeenBlock").css("visibility", "visible");
     $("#sendField").css("visibility", "visible");
     $("#plsSelectLabel").css("visibility", "hidden");
@@ -77,6 +79,7 @@ function SendMessage() {
             success: function (data) {
                 $("#messageBlock").append(data);
                 ToLastMessage();
+                window.messageCounter += 1;
             }
         });
 
@@ -103,6 +106,7 @@ function SendFile() {
         data: data,
         success: function (data) {
             $("#messageBlock").append(data);
+            window.messageCounter += 1;
             alert("Файл успешно отправлен!");
             ToLastMessage();
         },
@@ -170,4 +174,15 @@ function ReadMessages() {
 
 function NotificationSound() {
     notification.play();
+}
+
+function LoadNextMessages() {
+    $.ajax({
+        type: "GET",
+        url: "/Message/GetNext20Messages",
+        data: { chatId: window.currentChatId, myId: window.myId, count: window.messageCounter },
+        success: function (data) {
+            $("#messageBlock").prepend(data);
+        }
+    });
 }

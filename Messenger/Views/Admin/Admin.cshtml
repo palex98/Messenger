@@ -9,11 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin page</title>
+    <title>Администратор</title>
 
     @Styles.Render("~/Content/Bootstrap")
     @Styles.Render("~/Content/admin_style")
-
 </head>
 <body>
 
@@ -22,10 +21,12 @@
             <div class="row">
 
                 <div class="col-2">
-                    <p>Admin page</p>
+                    <p>Администратор</p>
                 </div>
                 <div class="col-1 offset-9">
-                    <button type="button" class="btn btn-secondary">Log out</button>
+                    <form method="get" action="/Login/Logout" target="_self">
+                        <input type="submit" class="btn btn-secondary" value="Выйти">
+                    </form>
                 </div>
             </div>
         </div>
@@ -39,15 +40,30 @@
                         </div>
                         @foreach (var user in Model)
                         {
-                            <div class="users-list-elem">
-                                <button type="button" class="btn btn-default button button-delete" id="button-delete" onclick="DeleteUser(@user.Id)">Удалить</button>
-                                <div class="inline-block-el" onclick="form_contacts(@user.Id)">
-                                    <p>@user.UserName</p>
-                                </div>
-                                <input type="text" class="inline-block-el form-control pass-input" size="10" id="pass_@user.Id" value="@user.Password">
-                                <button type="button" class="btn btn-default button button-save" id="button-save" onclick="ChangePassword(@user.Id)">Сохранить</button>
-                                <button type="button" class="btn btn-default button button-discard" id="button-discard" onclick="ReloadPage()">Отменить</button>
-                            </div>
+                       
+                        <div class="users-list-elem">
+                            <div class="container">
+                                <div class="row centered-vertical">
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-default button button-delete" id="button-delete" onclick="DeleteUser(@user.Id)">Удалить</button>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="inline-block-el" onclick="form_contacts(@user.Id)">
+                                            <p class="username-in-panel">@user.UserName</p>
+                                        </div>
+                                    </div>
+                                        <div class="col-3">
+                                            <input type="text" class="inline-block-el form-control pass-input" size="10" id="pass_@user.Id" value="@user.Password">
+                                        </div>
+                                            <div class="col-2">
+                                                <button type="button" class="btn btn-default button button-save" id="button-save" onclick="ChangePassword(@user.Id)">Сохранить</button>
+                                             </div>
+                                                <div class="col-2">
+                                                    <button type="button" class="btn btn-default button button-discard" id="button-discard" onclick="ReloadPage()">Отменить</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                        </div>
                         }
 
                     </div>
