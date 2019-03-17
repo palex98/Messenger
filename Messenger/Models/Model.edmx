@@ -13,6 +13,7 @@
           <Property Name="Sender" Type="int" Nullable="false" />
           <Property Name="Receiver" Type="int" Nullable="false" />
           <Property Name="ListOfMessages" Type="nvarchar(max)" />
+          <Property Name="LastMessage" Type="datetime" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -54,6 +55,7 @@
           <Property Name="Sender" Type="Int32" Nullable="false" />
           <Property Name="Receiver" Type="Int32" Nullable="false" />
           <Property Name="ListOfMessages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastMessage" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -95,6 +97,7 @@
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
                 <ScalarProperty Name="Receiver" ColumnName="Receiver" />
                 <ScalarProperty Name="ListOfMessages" ColumnName="ListOfMessages" />
+                <ScalarProperty Name="LastMessage" ColumnName="LastMessage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

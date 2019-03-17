@@ -12,6 +12,13 @@ namespace Messenger.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            HttpContext.Response.Cookies["user"].Value = "#";
+
+            return View("Login");
+        }
+
         public ActionResult UserLogin(string login, string pass)
         {
             using (var context = new MessengerDBEntities())
@@ -24,7 +31,7 @@ namespace Messenger.Controllers
                 }
                 catch
                 {
-                    ViewBag.ErrorMessage = "User not found!";
+                    ViewBag.ErrorMessage = "Пользователь не найден!";
                     return View("Login");
                 }
 
@@ -34,13 +41,18 @@ namespace Messenger.Controllers
 
                     if (pass == password)
                     {
+                        if (login == "admin")
+                        {
+                            return RedirectToAction("Index", "Admin", new { sdihwe89f43tb2sdbf3tb12dw = true });
+                        }
+
                         if (HttpContext != null) HttpContext.Response.Cookies["user"].Value = user.Id.ToString();
                         return RedirectToAction("Index", "Home", new { id = user.Id });
                     }
                 }
             }
 
-            ViewBag.ErrorMessage = "Password is incorrect!";
+            ViewBag.ErrorMessage = "Неправильный пароль!";
             return View("Login");
         }
     }

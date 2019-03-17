@@ -17,7 +17,7 @@ namespace Messenger.Controllers
         {
             List<Messages> listOfMessages = new List<Messages>();
 
-            using (MessengerDBEntities context = new MessengerDBEntities())
+            using (var context = new MessengerDBEntities())
             {
                 var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
 
@@ -50,7 +50,7 @@ namespace Messenger.Controllers
         {
             List<Messages> message = new List<Messages>();
 
-            using (MessengerDBEntities context = new MessengerDBEntities())
+            using (var context = new MessengerDBEntities())
             {
                 var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
 
@@ -71,6 +71,56 @@ namespace Messenger.Controllers
             ViewBag.myId = myId;
 
             return PartialView("Message", message);
+        }
+
+        [HttpGet]
+        public ActionResult GetNext20Messages(int chatId, int myId, int count)
+        {
+            List<Messages> listOfMessages = new List<Messages>();
+
+            using (var context = new MessengerDBEntities())
+            {
+                var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
+
+                List<int> messagesId = new List<int>();
+
+                try
+                {
+                    messagesId = JsonConvert.DeserializeObject<List<int>>(chat.ListOfMessages);
+                }
+                catch
+                {
+                    return PartialView("NoMessages");
+                }
+
+                foreach (var id in messagesId)
+                {
+                    listOfMessages.Add(context.Messages.FirstOrDefault(i => i.Id == id));
+                }
+            }
+
+            listOfMessages.Reverse();
+
+            if (listOfMessages.Count > count + 20)
+            {
+                listOfMessages = listOfMessages.Skip(count).Take(20).ToList();
+            }
+            else
+            {
+                listOfMessages = listOfMessages.Skip(count).ToList();
+            }
+
+            listOfMessages.Reverse();
+
+            ViewBag.myId = myId;
+
+            if (MessengerHub.Users.Exists(u => u.Id == myId))
+            {
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<MessengerHub>();
+                hubContext.Clients.Client(MessengerHub.Users.FirstOrDefault(c => c.Id == myId).ConnectionId).plusCounter(chatId, listOfMessages.Count);
+            }
+
+            return PartialView("Message", listOfMessages);
         }
 
         [HttpPost]
@@ -112,6 +162,8 @@ namespace Messenger.Controllers
                 var json = JsonConvert.SerializeObject(listOfMessages);
 
                 chat.ListOfMessages = json;
+
+                chat.LastMessage = DateTime.Now;
 
                 context.SaveChanges();
             }
@@ -180,6 +232,8 @@ namespace Messenger.Controllers
                 var json = JsonConvert.SerializeObject(listOfMessages);
 
                 chat.ListOfMessages = json;
+
+                chat.LastMessage = DateTime.Now;
 
                 context.SaveChanges();
             }

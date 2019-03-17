@@ -49,10 +49,11 @@ namespace Messenger.Controllers
 
                 if(!usersContacts1.Any(u => u.Key == prms.contactId))
                 {
-                    var newChat = new Chats()
+                    var newChat = new Chats
                     {
                         Sender = prms.userId,
-                        Receiver = prms.contactId
+                        Receiver = prms.contactId,
+                        LastMessage = DateTime.Now
                     };
 
                     var chat = context.Chats.Add(newChat);

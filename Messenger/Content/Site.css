@@ -76,7 +76,7 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 0 10px;
-    border-bottom: 2px solid #707070;
+    border-bottom: 1px dashed #707070;
     order:3;
 }
 
@@ -124,7 +124,7 @@
 }
 
 .message-col {
-    border-left: solid #707070 3px;
+    border-left: solid #707070 1px;
     font-size: 18px;
     height:  90vh;
 }

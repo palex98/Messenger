@@ -14,9 +14,20 @@
     };
 
     messenger.client.newMessage = function (chatId) {
+        document.title = "Новое сообщение!";
+        setTimeout(function () {
+            document.title = "Messenger";
+            setTimeout(function () {
+                document.title = "Новое сообщение!";
+                setTimeout(function () {
+                    document.title = "Messenger";
+                }, 2000);
+            }, 2000);
+        }, 2000);
         if (chatId == window.currentChatId) {
             GetLastMessage(chatId);
             ReadMessages();
+            window.messageCounter += 1;
         } else {
             $("#" + chatId + " .chat-counter").css('visibility', 'visible');
             var counter = +$("#" + chatId + " .chat-counter").text();
@@ -25,10 +36,9 @@
         }
         if (window.sound) NotificationSound();
         $(".block-chatter").each(function () {
-            let current_count;
-            current_count = $(this).css('order');
-            current_count++;
-            $(this).css('order',current_count);
+            var currentCount = $(this).css('order');
+            currentCount++;
+            $(this).css('order', currentCount);
         });
         $("#" + chatId).css('order', '1');
     };
@@ -39,6 +49,13 @@
             $(".message-unread-circle").each(function () {
                 $(this).removeClass("message-unread-circle");
             });
+        }
+    };
+
+    messenger.client.plusCounter = function (chatId, num) {
+
+        if (chatId == window.currentChatId) {
+            window.messageCounter += num;
         }
     };
 

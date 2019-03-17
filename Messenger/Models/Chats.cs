@@ -18,5 +18,6 @@ namespace Messenger.Models
         public int Sender { get; set; }
         public int Receiver { get; set; }
         public string ListOfMessages { get; set; }
+        public Nullable<System.DateTime> LastMessage { get; set; }
     }
 }

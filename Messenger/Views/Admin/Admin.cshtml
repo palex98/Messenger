@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin page</title>
+    <title>Администратор</title>
 
     @Styles.Render("~/Content/Bootstrap")
     @Styles.Render("~/Content/admin_style")
@@ -21,10 +21,12 @@
             <div class="row">
 
                 <div class="col-2">
-                    <p>Admin page</p>
+                    <p>Администратор</p>
                 </div>
                 <div class="col-1 offset-9">
-                    <button type="button" class="btn btn-secondary">Log out</button>
+                    <form method="get" action="/Login/Logout" target="_self">
+                        <input type="submit" class="btn btn-secondary" value="Выйти">
+                    </form>
                 </div>
             </div>
         </div>

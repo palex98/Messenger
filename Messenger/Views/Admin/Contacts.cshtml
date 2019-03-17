@@ -14,12 +14,16 @@
 
 @foreach (var user in ViewBag.UncheckedUsers)
 {
+    if (user.UserName != "admin")
+    {
     <div class="user-contacts-main">
         <div class="form-group form-check">
             <input type="checkbox" class="user-check" id="user-check-1" onchange="ChangeContact(@user.Id)">
             <label class="check-label" for="user-check-1">@user.UserName</label>
         </div>
     </div>
+    }
+    
 }
 <div class="user-contacts-footer">
     <button type="button" class="btn btn-default button button-ok" onclick="CloseContactsForm()" id="button-ok">Ок</button>

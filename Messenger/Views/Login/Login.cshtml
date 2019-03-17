@@ -6,24 +6,24 @@
     @Styles.Render("~/Content/Bootstrap")
     @Styles.Render("~/Content/login_style")
     @Scripts.Render("~/scripts/bootstrap")
-    <title>Login_form</title>
+    <title>Вход</title>
 </head>
 <body>
     <div class="container-fluid">
         <form class="form-login" action="/Login/UserLogin" method="post">
             <div class="text-center mb-4">
 
-                <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
             </div>
             <div class="form-label-group">
-                <input type="text" id="inputEmail" class="form-control" placeholder="Email or username" name="login" required>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Имя пользователя" name="login" required>
                 <label for="inputEmail"></label>
             </div>
             <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="pass" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" name="pass" required>
                 <label for="inputPassword"></label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block " type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block " type="submit">Войти</button>
             <div>
                 @if(ViewBag.ErrorMessage != null){
                 <p style="color: red;">@ViewBag.ErrorMessage</p>

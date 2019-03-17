@@ -16,7 +16,7 @@
         <div class="header">
             <div class="row">
                 <div class="col-1 text-center padding-10">
-                    Logo
+                    frmsng.ru
                 </div>
                 <div class="col-2 text-center settings-block padding-10">
                     <div class="btn btn-secondary sound-button" id="sound-button" onclick="SoundClick()">
@@ -32,7 +32,9 @@
                     </div>
                 </div>
                 <div class="col-2 padding-10">
-                    <button type="button" class="btn btn-secondary">Log out</button>
+                    <form method="get" action="/Login/Logout" target="_self">
+                    <input type="submit" class="btn btn-secondary" value="Выйти">
+                    </form>
                 </div>
             </div>
         </div>
@@ -42,10 +44,16 @@
                     <div id="left-col" class="left-col overflow-90 block-chatter-full">
                         @foreach (var chat in Model)
                         {
-                            <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">
-                                <span class="name-in-panel"><p class="clip">@chat.PartnerFullName</p></span>
-                                <div class="chat-counter">0</div>
-                            </div>
+                        <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">
+                            <span class="name-in-panel"><p class="clip">@chat.PartnerFullName</p></span>
+                            @if(chat.Unreaded > 0){
+                                <div class="chat-counter" style="visibility: visible;">@chat.Unreaded</div>
+                            }
+                            else
+                            {
+                                <div class="chat-counter">@chat.Unreaded</div>
+                            }
+                        </div>
                         }
                     </div>
                 </div>
