@@ -39,7 +39,7 @@
         <div class="main-part chatters">
             <div class="row">
                 <div class="col-3 no-padding-right">
-                    <div id="left-col" class="left-col overflow-90">
+                    <div id="left-col" class="left-col overflow-90 block-chatter-full">
                         @foreach (var chat in Model)
                         {
                             <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">

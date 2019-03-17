@@ -23,8 +23,14 @@
             counter++;
             $("#" + chatId + " .chat-counter").text(counter);
         }
-
-        if(window.sound) NotificationSound();
+        if (window.sound) NotificationSound();
+        $(".block-chatter").each(function () {
+            let current_count;
+            current_count = $(this).css('order');
+            current_count++;
+            $(this).css('order',current_count);
+        });
+        $("#" + chatId).css('order', '1');
     };
 
     messenger.client.readMessages = function (chatId) {
