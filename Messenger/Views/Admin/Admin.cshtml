@@ -98,33 +98,31 @@
 
                     </div>
                 </div>
-              
-                    
-             
+
+
+
             </div>
-            <div class="row">            
+            <div class="row">
                 <div class="col-6">
                     <div class="chat-list-to-download">
                         <div class="chat-list-to-download-top">
-                            <p>Список чатов</p>
+                            <p>Экспорт чатов</p>
                         </div>
                         <ul>
+                            @foreach (var chat in ViewBag.Export)
+                            {
                             <li>
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-6 chat-to-download-col">
+                                        <div class="col-12 chat-to-download-col">
                                             <div class="chat-to-download">
-                                                Chatter 1 
+                                                <a href="/Admin/Export?nbvjfdkvndlvndnvkfl=@chat.chatId&shkjbKJbKJFBFBbkjsdjbd4njb=true">@chat.users</a>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="chat-to-download chat-to-download-col">
-                                                Chatter 2
-                                            </div>
-                                            </div>
-                                        </div>
+                                    </div>
                                 </div>
                             </li>
+                            }
                         </ul>
                     </div>
                 </div>

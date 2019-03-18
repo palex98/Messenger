@@ -202,6 +202,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Custom\ChatDataToView.cs" />
+    <Compile Include="Models\Custom\ExportDialogue.cs" />
     <Compile Include="Models\Messages.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -1890,6 +1891,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\Contacts.cshtml" />
+    <Content Include="Views\Admin\Export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

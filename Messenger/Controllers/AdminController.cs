@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Messenger.Models.Custom;
+using System.Text;
 
 namespace Messenger.Controllers
 {
@@ -17,6 +19,25 @@ namespace Messenger.Controllers
                 using (var context = new MessengerDBEntities())
                 {
                     var users = context.Users.ToList();
+
+                    var dialogues = new List<ExportDialogue>();
+
+                    foreach (var chat in context.Chats)
+                    {
+                        string user1 = context.Users.FirstOrDefault(u => u.Id == chat.Sender).UserName;
+
+                        string user2 = context.Users.FirstOrDefault(u => u.Id == chat.Receiver).UserName;
+
+                        dialogues.Add(new ExportDialogue
+                        {
+                            chatId = chat.Id,
+                            users = user1 + "/" + user2
+                        });
+
+                    }
+
+                    ViewBag.Export = dialogues;
+
                     return View("Admin", users);
                 }
             }
@@ -94,6 +115,43 @@ namespace Messenger.Controllers
 
                 return PartialView("Contacts");
             }
+        }
+
+        [HttpGet]
+        public ActionResult Export(int nbvjfdkvndlvndnvkfl, bool shkjbKJbKJFBFBbkjsdjbd4njb = true)
+        {
+            int chatId = nbvjfdkvndlvndnvkfl;
+
+            List<string> text = new List<string>();
+
+            using (var context = new MessengerDBEntities())
+            {
+                var chat = context.Chats.FirstOrDefault(c => c.Id == chatId);
+
+                List<int> listOfMessages = new List<int>();
+
+                try
+                {
+                    listOfMessages = JsonConvert.DeserializeObject<List<int>>(chat.ListOfMessages);
+                }
+                catch
+                {
+
+                }
+
+                foreach (var msg in listOfMessages)
+                {
+                    var message = context.Messages.FirstOrDefault(m => m.Id == msg);
+
+                    var sender = context.Users.FirstOrDefault(u => u.Id == message.Sender);
+
+                    text.Add(message.DateTime.ToString("HH:mm dd.MM.yyyy") + " | " + sender.UserName + ": " + message.Text + "\n\n");
+                }
+            }
+
+            ViewBag.Messages = text;
+
+            return View("Export");
         }
     }
 }
