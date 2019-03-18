@@ -45,6 +45,9 @@
                         @foreach (var chat in Model)
                         {
                         <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">
+                           <div class="img-circle-chatter">
+
+                           </div>
                             <span class="name-in-panel"><p class="clip">@chat.PartnerFullName</p></span>
                             @if(chat.Unreaded > 0){
                                 <div class="chat-counter" style="visibility: visible;">@chat.Unreaded</div>

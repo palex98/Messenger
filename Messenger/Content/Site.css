@@ -84,13 +84,20 @@
         background-color: #f0f0f1;
     }
 
+.img-circle-chatter{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border:1px solid black;
+    border-radius:40px;
+}
 
 .name-in-panel {
     position: relative;
     top: -5px;
-    max-width: 80%;
+    max-width: 60%;
+    word-wrap: break-word;
     font-weight: 600;
-
 }
 
 .spinner-border{
@@ -99,12 +106,12 @@
     margin-top: 10px;
 }
 
-.clip {
+/*.clip {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 120%;
-}
+}*/
 
 .chat-counter {
     margin-left: auto;
@@ -159,9 +166,16 @@
 }
 
 .message-text {
+    width: 90%;
     display: inline-block;
-    width:90%;
 }
+
+.message-text > div {
+    word-wrap: break-word;
+    width: 110%;
+    display: inline-block;
+}
+
 
 .message-unread-circle {
     display: inline-block;

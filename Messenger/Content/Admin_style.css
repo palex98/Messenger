@@ -139,3 +139,38 @@ body {
     padding-bottom: 10px;
     text-align: center;
 }
+
+.chat-list-to-download {
+    background-color: #eeeeee;
+    margin-left: 15px;
+    margin-top: 15px;
+    max-width: 700px;
+}
+
+    .chat-list-to-download ul li {
+        list-style: none;
+        height: 40px;
+    }
+
+.chat-list-to-download ul{
+    padding-left: 0;
+}
+
+ .chat-list-to-download-top {
+        text-align: center;
+        border-bottom: 3px solid #282c34;
+    }
+
+ .chat-list-to-download ul li:hover {
+        cursor: pointer;
+ }
+
+.chat-to-download-col {
+    border-bottom: 1px solid #282c34;
+}
+
+.chat-to-download {
+    line-height: 40px;
+    color: #077ed8;
+    text-align: center;
+}
