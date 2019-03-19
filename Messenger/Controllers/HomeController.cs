@@ -10,6 +10,19 @@ namespace Messenger.Controllers
 {
     public class HomeController : Controller
     {
+        private List<string> colors = new List<string>
+        {
+            "#ff4444",
+            "#ffbb33",
+            "#00C851",
+            "#33b5e5",
+            "#2BBBAD",
+            "#4285F4",
+            "#aa66cc",
+            "#ec407a",
+            "#bcaaa4"
+        };
+
         public ActionResult Index(int id)
         {
             var userFromCookies = HttpContext.Request.Cookies["user"].Value;
@@ -48,13 +61,16 @@ namespace Messenger.Controllers
                         Receiver = c.Key,
                         PartnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
                         LastMessage = context.Chats.FirstOrDefault(ch => ch.Id == c.Value).LastMessage,
-                        Unreaded = unresded
+                        Unreaded = unresded, 
+                        Color = colors[context.Users.Count()%colors.Count]
                     };
                     data.Add(dt);
                 }
 
                 user.LastSeen = DateTime.Now.ToLocalTime().ToString("HH:mm dd.MM.yyyy");
                 context.SaveChanges();
+
+                ViewBag.Username = user.UserName;
             }
 
             ViewBag.MyId = id;

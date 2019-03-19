@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MessengerDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MessengerDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Chats">
           <Key>
             <PropertyRef Name="Id" />
@@ -36,14 +36,14 @@
           <Property Name="Contacts" Type="nvarchar(max)" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ConnectionId" Type="nvarchar(max)" />
+          <Property Name="Color" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityContainer Name="Хранилище MessengerDBModelContainer">
           <EntitySet Name="Chats" EntityType="Self.Chats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MessengerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -78,6 +78,7 @@
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ConnectionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="MessengerDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Chats" EntityType="Self.Chats" />
@@ -116,6 +117,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MessengerDBModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />

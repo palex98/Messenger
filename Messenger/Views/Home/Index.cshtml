@@ -16,7 +16,7 @@
         <div class="header">
             <div class="row">
                 <div class="col-1 text-center padding-10">
-                    frmsng.ru
+                    @ViewBag.Username
                 </div>
                 <div class="col-2 text-center settings-block padding-10">
                     <div class="btn btn-secondary sound-button" id="sound-button" onclick="SoundClick()">
@@ -45,7 +45,7 @@
                         @foreach (var chat in Model)
                         {
                         <div class="block-chatter" id="@chat.ChatId" onclick="ClickOnChat(@chat.ChatId, @chat.Receiver, '@chat.PartnerFullName')">
-                           <div class="img-circle-chatter">
+                           <div class="img-circle-chatter" style="background-color: @chat.Color;">
 
                            </div>
                             <span class="name-in-panel"><p class="clip">@chat.PartnerFullName</p></span>
