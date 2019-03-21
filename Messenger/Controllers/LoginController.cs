@@ -1,4 +1,5 @@
-﻿using Messenger.Models;
+﻿using System;
+using Messenger.Models;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -29,7 +30,7 @@ namespace Messenger.Controllers
                 {
                     user = context.Users.First(u => u.UserName == login);
                 }
-                catch
+                catch(Exception ex)
                 {
                     ViewBag.ErrorMessage = "Пользователь не найден!";
                     return View("Login");

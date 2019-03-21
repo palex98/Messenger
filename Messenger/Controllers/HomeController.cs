@@ -10,17 +10,17 @@ namespace Messenger.Controllers
 {
     public class HomeController : Controller
     {
-        private List<string> colors = new List<string>
+        public static List<string> colors = new List<string>
         {
-            "#ff4444",
-            "#ffbb33",
-            "#00C851",
-            "#33b5e5",
-            "#2BBBAD",
-            "#4285F4",
-            "#aa66cc",
-            "#ec407a",
-            "#bcaaa4"
+            "ff4444",
+            "ffbb33",
+            "00C851",
+            "33b5e5",
+            "2BBBAD",
+            "4285F4",
+            "aa66cc",
+            "ec407a",
+            "bcaaa4"
         };
 
         public ActionResult Index(int id)
@@ -55,14 +55,16 @@ namespace Messenger.Controllers
 
                     int unresded = messages.Count();
 
+                    var contact = context.Users.FirstOrDefault(u => u.Id == c.Key);
+
                     ChatDataToView dt = new ChatDataToView
                     {
                         ChatId = c.Value,
                         Receiver = c.Key,
-                        PartnerFullName = context.Users.FirstOrDefault(u => u.Id == c.Key).UserName,
+                        PartnerFullName = contact.UserName,
                         LastMessage = context.Chats.FirstOrDefault(ch => ch.Id == c.Value).LastMessage,
                         Unreaded = unresded, 
-                        Color = colors[context.Users.Count()%colors.Count]
+                        Color = contact.Color
                     };
                     data.Add(dt);
                 }

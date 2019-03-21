@@ -60,7 +60,8 @@ namespace Messenger.Controllers
                         {
                             UserName = username,
                             Password = password,
-                            LastSeen = ""
+                            LastSeen = "",
+                            Color = HomeController.colors[context.Users.Count()%HomeController.colors.Count]
                         };
 
                         context.Users.Add(newUser);

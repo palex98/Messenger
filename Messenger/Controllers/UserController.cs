@@ -152,6 +152,16 @@ namespace Messenger.Controllers
                 }
 
                 context.SaveChanges();
+
+                foreach (var chat in context.Chats)
+                {
+                    if (chat.Sender == prms.userId || chat.Receiver == prms.userId)
+                    {
+                        context.Chats.Remove(chat);
+                    }
+                }
+
+                context.SaveChanges();
             }
         }
 
