@@ -10,7 +10,7 @@ function ClickOnChat(chatId, receiver, name) {
         GetMessagesFromCurrentChat();
         GetUserStatus(receiver);
         $("#messageBlock").html('<div class="d-flex justify-content-center"><span>Загрузка...</span></div>');
-        
+
     }
 
     if ($("#" + chatId + " .chat-counter").text() != "0") {
@@ -23,8 +23,8 @@ function ClickOnChat(chatId, receiver, name) {
     $(".block-chatter").removeClass('active-chatter');
     $("#" + chatId).toggleClass("active-chatter");
     $("#" + chatId + " .chat-counter").text("0");
-    $("#" + chatId + " .chat-counter").css('visibility', 'hidden'); 
-    
+    $("#" + chatId + " .chat-counter").css('visibility', 'hidden');
+
 }
 
 function GetUserStatus(userId) {
@@ -123,7 +123,7 @@ function ToLastMessage() {
 }
 
 $('#message-area').on('keypress',
-    function(e) {
+    function (e) {
         if (e.which == 13) {
             e.preventDefault();
             SendMessage();
@@ -185,4 +185,38 @@ function LoadNextMessages() {
             $("#messageBlock").prepend(data);
         }
     });
+}
+
+function tabLableStart() {
+    while (true) {
+        var counter = 0;
+        $('.chat-counter').each(function (index, value) {
+            counter += +value.text();
+        });
+
+        if (counter > 0) {
+            while (true) {
+                var count = 0;
+                $('.chat-counter').each(function (index, value) {
+                    count += +value.text();
+                });
+                document.title = `(${count})Новое сообщение!`;
+                if (count === 0) {
+                    document.title = "Messenger";
+                    break;
+                }
+                sleep(1000);
+                document.title = "Messenger";
+            }
+        }
+    }
+}
+
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
+    }
 }

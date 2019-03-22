@@ -14,16 +14,6 @@
     };
 
     messenger.client.newMessage = function (chatId) {
-        document.title = "Новое сообщение!";
-        setTimeout(function () {
-            document.title = "Messenger";
-            setTimeout(function () {
-                document.title = "Новое сообщение!";
-                setTimeout(function () {
-                    document.title = "Messenger";
-                }, 2000);
-            }, 2000);
-        }, 2000);
         if (chatId == window.currentChatId) {
             GetLastMessage(chatId);
             ReadMessages();
