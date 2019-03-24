@@ -84,14 +84,11 @@
                                         <div class="col-4">
                                             <label for="file" class="upload-button">Отправить файл</label>
                                             <input type="file" name="file" id="file" onchange="SendFile()" />
-
                                             <input class="input-inline" id="button-send btn btn-primary" onclick="SendMessage()" type="button" value="Отпр.">
-
                                         </div>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -109,7 +106,20 @@
     <script type="text/javascript">
         window.onload = function () {
             window.myId = @ViewBag.MyId;
-            tabLableStart();
+
+            var timerId = setInterval(function() {
+                var counter = 0;
+                $('.chat-counter').each(function (index, value) {
+                    counter += +value.textContent;
+                    console.log(value.textContent);
+                });
+                if (counter > 0) {
+                    document.title = `(${counter})Новое сообщение!`;
+                    setTimeout(function() {
+                        document.title = 'Messenger';
+                    }, 1500);
+                }
+            }, 3000);
         };
 
         window.sound = true;

@@ -186,37 +186,3 @@ function LoadNextMessages() {
         }
     });
 }
-
-function tabLableStart() {
-    while (true) {
-        var counter = 0;
-        $('.chat-counter').each(function (index, value) {
-            counter += +value.text();
-        });
-
-        if (counter > 0) {
-            while (true) {
-                var count = 0;
-                $('.chat-counter').each(function (index, value) {
-                    count += +value.text();
-                });
-                document.title = `(${count})Новое сообщение!`;
-                if (count === 0) {
-                    document.title = "Messenger";
-                    break;
-                }
-                sleep(1000);
-                document.title = "Messenger";
-            }
-        }
-    }
-}
-
-function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds) {
-            break;
-        }
-    }
-}
