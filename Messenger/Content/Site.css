@@ -49,8 +49,16 @@
     min-width: 84px;
 }
 
+@media screen and (max-device-width: 550px) {
+    .sound-button{
+        position:fixed;
+        left: 220px;
+        top: 50px;
+    }
+}
+
 .sound-link {
-    color: #75c12a ;
+    color: #75c12a;
 }
 
  .sound-link:hover {
@@ -226,6 +234,16 @@
     bottom: 10px;
     right:140px;
 }
+
+@media screen and (max-device-width: 991px) {
+    .input-inline {
+        position: initial;
+    }
+    .upload-button {
+        position: relative;
+        left: 10px;
+    }
+    }
 
 .upload-button {
     position: absolute;
