@@ -2,19 +2,21 @@
     var messenger = $.connection.messengerHub;
 
     messenger.client.onUserConnected = function (userId) {
-        if (window.currentReceiver == userId) {
+        if (window.currentReceiver === userId) {
             GetUserStatus(userId);
         }
+        //alert('CONNECT ' + userId);
     };
 
     messenger.client.onUserDisconnected = function (userId) {
-        if (window.currentReceiver == userId) {
+        if (window.currentReceiver === userId) {
             GetUserStatus(userId);
         }
+        //alert('DISCONNECT ' + userId);
     };
 
     messenger.client.newMessage = function (chatId) {
-        if (chatId == window.currentChatId) {
+        if (chatId === window.currentChatId) {
             GetLastMessage(chatId);
             ReadMessages();
             window.messageCounter += 1;
@@ -35,7 +37,7 @@
 
     messenger.client.readMessages = function (chatId) {
 
-        if (chatId == window.currentChatId) {
+        if (chatId === window.currentChatId) {
             $(".message-unread-circle").each(function () {
                 $(this).removeClass("message-unread-circle");
             });
@@ -44,7 +46,7 @@
 
     messenger.client.plusCounter = function (chatId, num) {
 
-        if (chatId == window.currentChatId) {
+        if (chatId === window.currentChatId) {
             window.messageCounter += num;
         }
     };

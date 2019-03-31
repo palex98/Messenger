@@ -1,7 +1,11 @@
 ﻿var notification = new Audio("/Content/notification_sound.wav");
 
 function ClickOnChat(chatId, receiver, name) {
-    if (chatId != window.currentChatId) {
+    if ($("#" + chatId + " .chat-counter").text() !== "0") {
+        ReadMessages();
+    }
+
+    if (chatId !== window.currentChatId) {
         window.currentChatId = chatId;
         window.currentReceiver = receiver;
         window.messageCounter = 20;
@@ -11,10 +15,6 @@ function ClickOnChat(chatId, receiver, name) {
         GetUserStatus(receiver);
         $("#messageBlock").html('<div class="d-flex justify-content-center"><span>Загрузка...</span></div>');
 
-    }
-
-    if ($("#" + chatId + " .chat-counter").text() != "0") {
-        ReadMessages();
     }
 
     $("#lastSeenBlock").css("visibility", "visible");
@@ -48,8 +48,11 @@ function GetMessagesFromCurrentChat() {
             $("#messageBlock").html(data);
             ToLastMessage();
             $("#loadButton").css("visibility", "visible");
+        },
+        error: function() {
+            alert(
+                'Произошла сетевая ошибка при загрузке сообщений! Рекомендуется проверить сетевое соединение и обновить страницу.');
         }
-
     });
 }
 
@@ -61,6 +64,10 @@ function GetLastMessage(chatId) {
         success: function (data) {
             $("#messageBlock").append(data);
             ToLastMessage();
+        },
+        error: function () {
+            alert(
+                'Произошла сетевая ошибка при загрузке сообщений! Рекомендуется проверить сетевое соединение и обновить страницу.');
         }
     });
 }
@@ -70,7 +77,7 @@ function SetChatterName(name) {
 }
 
 function SendMessage() {
-    if ($('#message-area').val() != '') {
+    if ($('#message-area').val() !== '') {
         var text = $("#message-area").val();
         $.ajax({
             type: "POST",
@@ -80,11 +87,13 @@ function SendMessage() {
                 $("#messageBlock").append(data);
                 ToLastMessage();
                 window.messageCounter += 1;
+                $("#message-area").val('');
+            },
+            error: function () {
+                alert(
+                    'Произошла сетевая ошибка при отправке сообщения! Рекомендуется проверить сетевое соединение и обновить страницу.');
             }
         });
-
-        $("#message-area").val('');
-
     }
 }
 
@@ -109,9 +118,11 @@ function SendFile() {
             window.messageCounter += 1;
             alert("Файл успешно отправлен!");
             ToLastMessage();
+            $('input[type=file]')[0].val('');
         },
         error: function (result) {
             alert("Ошибка при отправке файла!");
+            $('input[type=file]')[0].val('');
         }
 
     });
@@ -124,7 +135,7 @@ function ToLastMessage() {
 
 $('#message-area').on('keypress',
     function (e) {
-        if (e.which == 13) {
+        if (e.which === 13) {
             e.preventDefault();
             SendMessage();
         }
@@ -136,10 +147,10 @@ function getCookie(cname) {
     var ca = decodedCookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -147,7 +158,7 @@ function getCookie(cname) {
 }
 
 function SoundClick() {
-    if (window.sound == true) {
+    if (window.sound === true) {
         $("#sound-link").html("Звук выкл.");
         $("#sound-link").css('color', '#f23c34');
         window.sound = false;
@@ -168,6 +179,9 @@ function ReadMessages() {
             $(".message-unread-circle").each(function () {
                 $(this).removeClass("message-unread-circle");
             });
+        },
+        error: function (result) {
+            alert("Произошла ошибка при синхронизации с сервером! Рекомендуется проверить сетевое соединение и обновить страницу.");
         }
     });
 }

@@ -102,7 +102,7 @@
 
 .name-in-panel {
     position: relative;
-    top: -5px;
+    top: 5px;
     max-width: 60%;
     word-wrap: break-word;
     font-weight: 600;
@@ -187,7 +187,6 @@
 
 .message-unread-circle {
     display: inline-block;
-    float: left;
     width: 1%;
     min-width:5px;
     height: 5px;
@@ -218,7 +217,7 @@
 }
 
 .form-control {
-    bottom: 0px;
+    bottom: 0;
     left: 30px;
     display: inline-block;
     resize: none;

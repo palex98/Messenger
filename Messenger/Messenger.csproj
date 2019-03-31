@@ -1860,6 +1860,8 @@
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\frmsng.ru - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\frmsng.ru - Web Deploy1.pubxml" />
     <None Include="Properties\PublishProfiles\librarymanager.tk - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
