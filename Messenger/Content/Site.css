@@ -51,9 +51,24 @@
 
 @media screen and (max-device-width: 550px) {
     .sound-button{
-        position:fixed;
-        left: 220px;
-        top: 50px;
+        position:absolute;
+        left: 180px;
+        top: 10px;
+    }
+
+    .logout-button{
+        position: relative;
+        right: 30px;
+    }
+
+    .header-el{
+        word-wrap: break-word;
+        width: 85px;
+        display: block;
+    }
+
+    #lastSeenBlock{
+        margin-top: 15px;
     }
 }
 
@@ -106,12 +121,11 @@
     max-width: 60%;
     word-wrap: break-word;
     font-weight: 600;
+    margin-left : 7px;
 }
 
-.spinner-border{
-    visibility: hidden;
-    position: absolute;
-    margin-top: 10px;
+#spinner{
+    display: none;
 }
 
 /*.clip {
@@ -230,28 +244,51 @@
     border-radius: 5px;
     width: 100px;
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     right:140px;
 }
 
-@media screen and (max-device-width: 991px) {
+@media screen and (max-device-width: 767px) {
     .input-inline {
-        position: initial;
+        position: relative;
+        left: -25px;
+        bottom: 65px;
     }
     .upload-button {
         position: relative;
-        left: 10px;
+        left: -25px ;
+        bottom: -27px;
     }
     }
 
+@media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+    .input-inline {
+        position: relative;
+        bottom: 65px;
+        left: -25px;
+    }
+
+     .upload-button {
+        position: relative;
+        left: -23px ;
+        bottom: -28px ;
+    }
+}
+
+@media screen and (min-device-width: 991px){
+    .upload-button {
+        position: absolute;
+        right: 135px;
+        bottom: -10px;
+    }
+}
+
 .upload-button {
-    position: absolute;
-    right: 40px;
     display: inline-block;
     background-color: #6c757d;
     border-radius: 5px;
     font-size: 10px;
-    width: 70px;
+    width: 100px;
     color:white;
 }
 

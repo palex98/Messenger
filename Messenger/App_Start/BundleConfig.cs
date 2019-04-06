@@ -19,6 +19,12 @@ namespace Messenger
             bundles.Add(new StyleBundle("~/Content/Bootstrap").Include(
                       "~/Content/bootstrap.min.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Fontawesome").Include(
+                     "~/Content/all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Fontsolid").Include(
+                     "~/Content/solid.css"));
+
             bundles.Add(new StyleBundle("~/Content/login_style").Include(
                       "~/Content/Login_style.css"));
 

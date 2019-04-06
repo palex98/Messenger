@@ -106,7 +106,7 @@ function SendFile() {
 
     data.append("myId", window.myId);
     data.append("chatId", window.currentChatId);
-
+    $('#spinner').css('display', 'block');
     $.ajax({
         type: "POST",
         url: "/Message/PostFileMessage",
@@ -116,13 +116,16 @@ function SendFile() {
         success: function (data) {
             $("#messageBlock").append(data);
             window.messageCounter += 1;
+            $('#spinner').css('display', 'none');
             alert("Файл успешно отправлен!");
             ToLastMessage();
             $('input[type=file]')[0].val('');
         },
         error: function (result) {
+            $('#spinner').css('display', 'none');
             alert("Ошибка при отправке файла!");
             $('input[type=file]')[0].val('');
+
         }
 
     });

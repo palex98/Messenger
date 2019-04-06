@@ -2,9 +2,8 @@
 
 @foreach (var m in Model)
 {
-
-    if (m.Sender == ViewBag.myId)
-    {
+        if (m.Sender == ViewBag.myId)
+        {
         <div class="message my-message container-fluid">
             <div class="row no-gutter">
                 <div class="col-3">
@@ -41,9 +40,9 @@
                 </div>
             </div>
         </div>
-    }
-    else
-    {
+        }
+        else
+        {
         <div class="message not-my-message container-fluid">
             <div class="row no-gutter">
                 <div class="col-3">
@@ -78,5 +77,5 @@
                 </div>
             </div>
         </div>
-    }
-}
+        }
+        }

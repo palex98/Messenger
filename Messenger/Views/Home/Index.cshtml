@@ -10,6 +10,10 @@
     <title>Messenger</title>
     @Styles.Render("~/Content/Site")
     @Styles.Render("~/Content/Bootstrap")
+    @Styles.Render("~/Content/Fontawesome")
+    @Styles.Render("~/Content/Fontsolid")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+
 </head>
 <body>
     <div class="container">
@@ -33,7 +37,7 @@
                 </div>
                 <div class="col-2 padding-10">
                     <form method="get" action="/Login/Logout" target="_self">
-                    <input type="submit" class="btn btn-secondary" value="Выйти">
+                        <input type="submit" class="btn btn-secondary logout-button" value="Выйти">
                     </form>
                 </div>
             </div>
@@ -61,6 +65,10 @@
                     </div>
                 </div>
                 <div class="col-9 message-col no-padding-left">
+                    <div class="d-flex justify-content-center">
+                        <i class="fa fa-spinner fa-spin fa-fw" id="spinner"></i>
+                        <span class="sr-only">Загрузка...</span>
+                    </div>
                     <div id="right-col" class="overflow-80">
                         <div class="d-flex justify-content-center" id="loadButton">
                             <button class="message-download-button btn btn-primary" onclick="LoadNextMessages()">Загрузить еще</button>
